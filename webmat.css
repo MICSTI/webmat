@@ -1,0 +1,83 @@
+/* ------ WEBMAT CSS ------ */
+.webmat-title {
+	font-size: 150%;
+	font-family: Georgia, "Times New Roman", serif;
+	margin-bottom: 24px;
+}
+
+.page-info {
+	margin-bottom: 32px;
+}
+
+.option-group {
+	margin-bottom: 16px;
+	border: 1px solid black;
+	padding: 4px 8px;
+}
+
+.option-group label {
+	margin-left: 3px;
+}
+
+.option-group-title {
+	color: #106470;
+	font-weight: bold;
+}
+
+.question {
+	color: #106470;
+	font-weight: bold;
+	margin-bottom: 16px;
+	padding: 4px 8px;
+}
+
+.results-title {
+	margin-bottom: 16px;
+}
+
+.result {
+	border-bottom: 1px solid black;
+	margin-bottom: 8px;
+	padding: 4px 6px;
+}
+
+.item {
+	margin-bottom: 32px;
+	padding: 4px 6px;
+}
+
+.result-title {
+	font-weight: bold;
+}
+
+.result-title:hover {
+	cursor: pointer;
+}
+
+.item-title {
+	color: #117bb8;
+}
+
+.item-title:hover {
+	cursor: pointer;
+}
+
+.result-details {
+	display: none;
+}
+
+.result-details div {
+	margin-bottom: 12px;
+}
+
+.result-details div:last-child {
+	margin-bottom: 0px !important;
+}
+
+.no-results-found {
+	color: red;
+}
+
+#button-back {
+	margin-top: 16px;
+}
