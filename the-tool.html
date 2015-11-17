@@ -1,0 +1,56 @@
+<div class="question">Please tick the boxes below and tick all boxes that are appropriate for your study.</div>
+<form action="../results" method="post">It is possible that there are no results shown for your selection. That is because the measurements included now have been systematically selected.
+	
+	<div class="option-container">
+		<div class="option-group-title" onclick="toggleDisplay('group-age')">On which group are you focusing in your study?</div>
+		<div class="option-group" id="group-age" style="display: none;">
+			<input id="children" name="children" type="checkbox" /> <label for="children">Children</label>
+			<input id="adolescents" name="adolescents" type="checkbox" /> <label for="adolescents">Adolescents</label>
+			<input id="adults" name="adults" type="checkbox" /> <label for="adults">Adults</label>
+			<input id="elderly" name="elderly" type="checkbox" /> <label for="elderly">Elderly</label>
+		</div>
+		
+		<div class="option-group-title" onclick="toggleDisplay('group-type')">What do you want to study?</div>
+		<div class="option-group" id="group-type" style="display: none;">
+			<input id="general" name="general" type="checkbox" /> <label for="general">General well-being - assessing ones feelings, how pleasurable or filled with happiness a person’s life is, as well as how well one functions in life (e.g. resilience, optimism, relationships)</label>
+			<input id="feeling" name="feeling" type="checkbox" /> <label for="feeling">Feelings - the amount of positive and/or negative emotions one experiences</label>
+			<input id="life-satisfaction" name="life-satisfaction" type="checkbox" /> <label for="life-satisfaction">Life satisfaction - how one evaluates his/her life</label>
+			<input id="flourishing" name="flourishing" type="checkbox" /> <label for="flourishing">Flourishing</label>
+			<input id="resilience" name="resilience" type="checkbox" /> <label for="resilience">Resilience - the ability to cope with or recover from stressful situations</label>
+			<input id="mindfulness" name="mindfulness" type="checkbox" /> <label for="mindfulness">Mindfulness</label>
+			<input id="self-esteem-efficacy" name="self-esteem-efficacy" type="checkbox" /> <label for="self-esteem-efficacy">Self-esteem/Self-efficacy</label>
+			<input id="optimism" name="optimism" type="checkbox" /> <label for="optimism">Optimism</label>
+			<input id="meaning-purpose" name="meaning-purpose" type="checkbox" /> <label for="meaning-purpose">Meaning and purpose - to what degree a person considers his/her life to be valuable and important. </label>
+			<input id="engagement" name="engagement" type="checkbox" /> <label for="engagement">Engagement</label>
+			<input id="autonomy" name="autonomy" type="checkbox" /> <label for="autonomy">Autonomy</label>
+			<input id="commitment" name="commitment" type="checkbox" /> <label for="commitment">Commitment</label>
+			<input id="competence" name="competence" type="checkbox" /> <label for="competence">Competence</label>
+		</div>
+		
+		<div class="option-group-title" onclick="toggleDisplay('group-workplace')">Is it a workplace setting?</div>
+		<div class="option-group" id="group-workplace" style="display: none;">
+			<input id="workplace" name="workplace" type="checkbox" /> <label for="workplace">Workplace</label>
+		</div>
+	
+		<div class="option-group-title" onclick="toggleDisplay('group-length')">How long should the test be?</div>
+		<div class="option-group" id="group-length" style="display: none;">
+			<input id="items-single" name="items-single" type="checkbox" /> <label for="items-single">Single-Item</label>
+			<input id="general-indicators" name="general-indicators" type="checkbox" /> <label for="general-indicators">General-Indicators</label>
+			<input id="items-2-10" name="items-2-10" type="checkbox" /> <label for="items-2-10">2-10 items</label>
+			<input id="items-11-20" name="items-11-20" type="checkbox" /> <label for="items-11-20">11-20 items</label>
+			<input id="items-21-30" name="items-21-30" type="checkbox" /> <label for="items-21-30">21-30 items</label>
+			<input id="items-30+" name="items-30+" type="checkbox" /> <label for="items-30+">more than 30 items</label>
+		</div>
+	</div>
+	
+	<div>
+		<input type="submit" value="Show me the results" />
+	</div>
+</form>
+
+<script type="text/javascript">
+	function toggleDisplay(_id) {
+		var elem = document.getElementById(_id); 
+		elem.style.display = elem.style.display == 'block' ? 'none' : 'block';
+	}
+</script>
