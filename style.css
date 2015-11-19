@@ -17,6 +17,12 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 @import url('css/expound.css?v=20140129');
 
 /* ------ WEBMAT CSS ------ */
+#mylogo {
+	float: right;
+	position: relative;
+    top: -28px;
+}
+
 .webmat-title {
 	font-size: 150%;
 	font-family: Corbel, Georgia, "Times New Roman", serif;
@@ -30,7 +36,7 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 .option-group {
 	margin-bottom: 16px;
 	padding: 4px 8px;
-	background-color: #eee;
+	background-color: #fff5ee;
 	margin-top: -5px;
 }
 
@@ -41,7 +47,7 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 .option-group-title {
 	font-weight: bold;
 	padding: 6px 9px;
-	background-color: #ccc;
+	background-color: #F7CA18;
 	margin-bottom: 5px;
 }
 
@@ -83,7 +89,7 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 	color: #000;
 	font-weight: bold;
 	padding: 6px 9px;
-	background-color: #ccc;
+	background-color: #F7CA18;
 }
 
 .item-title:hover {
@@ -94,7 +100,7 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 	display: none;
 	
 	padding: 4px 8px;
-	background-color: #eee;
+	background-color: #fff5ee;
 }
 
 .result-details div {
@@ -153,4 +159,25 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 	display: inline-block;
 	width: 46%;
 	vertical-align: top;
+}
+
+
+#mylogo {
+    width: 10%;
+}
+
+.site-info {
+	margin-top: -16px;
+}
+
+.cam-text {
+	vertical-align: top;
+	display: inline-block;
+	margin-right: 16px;
+	position: relative;
+	top: 10px;
+}
+
+.cam-img {
+	
 }
