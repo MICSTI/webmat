@@ -196,6 +196,8 @@ get_header(); ?>
 								if (count($where) > 0) {
 									$where_query = implode($glue_outside_group, $where);
 									
+									$where_query .= " AND active = 1";
+									
 									// set up PDO database connection
 									try {
 										$db = new PDO('mysql:host=' . $DATABASE_HOST . ';dbname=' . $DATABASE_NAME . ';charset=utf8', $DATABASE_USER, $DATABASE_PASSWORD);

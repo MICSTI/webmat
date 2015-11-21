@@ -19,6 +19,12 @@
 			} else {
 				$where = "keyword_classification LIKE '%" . $category . "%'";
 			}
+			
+			if ($where != "") {
+				$where .= " AND ";
+			}
+			
+			$where .= "active = 1";
 
 			$query = $db->prepare("SELECT name, kw_single_item, kw_general_indicators, kw_items, abstract, keywords, example_items, original_study_details, secondary_study_details FROM measure_data WHERE " . $where);
 			$query->execute();
@@ -36,7 +42,14 @@
 					$no_items = $row["kw_items"];
 					
 					$html .= "<div class='item'>";
-						$html .= "<div class='item-title' onclick=\"toggleDisplay('" . $id . "')\">" . $row["name"] . "</div>";
+						$html .= "<div class='item-title' onclick=\"toggleDisplay('" . $id . "')\">";
+						
+							$html .=  "<span id='" . $id . "-plus' class='detail-indicator detail-indicator-plus'>+</span>";
+							$html .=  "<span id='" . $id . "-minus' class='detail-indicator detail-indicator-minus'>-</span>";
+							
+							$html .=  "<span>" . $row["name"] . "</span>";
+						
+						$html .= "</div>";
 						
 						$html .= "<div class='result-details' id='" . $id . "'>";
 							$html .= "<div>" . $row["abstract"] . "</div>";
@@ -74,7 +87,22 @@
 		}
 		
 		$html .= "<script type='text/javascript'>";
-			$html .= "function toggleDisplay(_id) { var elem = document.getElementById(_id); elem.style.display = elem.style.display == 'block' ? 'none' : 'block'; }";
+			$html .= "function toggleDisplay(_id) { ";
+				$html .= "var elem = document.getElementById(_id);";
+				$html .= "var plus = document.getElementById(_id + '-plus');";
+				$html .= "var minus = document.getElementById(_id + '-minus');";
+				
+				$html .= "if (elem.style.display == 'block') {";
+					$html .= "elem.style.display = 'none';";
+					$html .= "plus.style.display = 'inline-block';";
+					$html .= "minus.style.display = 'none';";
+				$html .= "} else {";
+					$html .= "elem.style.display = 'block';";
+					$html .= "plus.style.display = 'none';";
+					$html .= "minus.style.display = 'inline-block';";
+				$html .= "}";
+				
+			$html .= " }";
 		$html .= "</script>";
 		
 		return $html;

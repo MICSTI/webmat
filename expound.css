@@ -101,7 +101,6 @@ a:hover {
 }
 .navigation-main {
   background: #838b8b;
-  margin-top: -60px;
   /* Old social menu */
 
 }
@@ -585,9 +584,10 @@ h3 {
 .site-content article {
   border-bottom: solid 1px #dddddd;
   padding-left: 40px;
-  margin: 0;
   padding-top: 40px;
+  padding-right: 70px;
   padding-bottom: 40px;
+  margin-right: -70px;
 }
 .site-content .entry-title {
   font-size: 20px;
@@ -1148,7 +1148,7 @@ a.wpm-button:hover {
     width: 960px;
   }
   #primary {
-    width: 680px;
+    width: 890px;
   }
   .expound-full-width #primary {
     width: 960px;
@@ -1187,7 +1187,7 @@ a.wpm-button:hover {
     width: 900px;
   }
   #primary {
-    width: 620px;
+    width: 830px;
   }
   .expound-full-width #primary {
     width: 900px;
@@ -1201,7 +1201,7 @@ a.wpm-button:hover {
     width: 840px;
   }
   #primary {
-    width: 560px;
+    width: 770px;
   }
   .expound-full-width #primary {
     width: 840px;
@@ -1215,7 +1215,7 @@ a.wpm-button:hover {
     width: 87%;
   }
   #primary {
-    width: 100%;
+    width: 90%;
     margin-right: 0;
   }
   #secondary {
@@ -1301,5 +1301,10 @@ a.wpm-button:hover {
 @media (max-width: 600px) {
   #page {
     width: 85%;
+  }
+}
+@media (min-width: 900px) {
+  .navigation-main {
+	  margin-top: -60px;
   }
 }

@@ -181,3 +181,16 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 .cam-img {
 	
 }
+
+.detail-indicator {
+	display: inline-block;
+}
+
+.detail-indicator-plus {
+	margin-right: 5px;
+}
+
+.detail-indicator-minus {
+	display: none;
+	margin-right: 9px;
+}
