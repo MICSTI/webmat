@@ -194,3 +194,90 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 	display: none;
 	margin-right: 9px;
 }
+
+/** ------ THE TOOL ------- **/
+.the-tool-container {
+	width: 100%;
+}
+
+.the-tool-progress span {
+	display: inline-block;
+}
+
+.the-tool-circle {
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	border: 5px solid cornflowerblue;
+}
+
+.the-tool-circle:hover {
+	cursor: pointer;
+}
+
+.the-tool-circle:not(.the-tool-category-selected):hover {
+	background-color: #9ab6e8;
+}
+
+.the-tool-line {
+	position: relative;
+	top: -12px;
+	width: 10%;
+	background-color: cornflowerblue;
+	margin: 0px -4px;
+	height: 5px;
+}
+
+.the-tool-category-selected {
+	background-color: cornflowerblue;
+}
+
+.the-tool-category-selected:hover {
+	background-color: cornflowerblue !important;
+}
+
+.the-tool-content {
+	display: none;
+}
+
+.the-tool-content-active {
+	display: block !important;
+}
+
+.category-question {
+	width: 100%;
+	margin-top: 16px;
+	padding: 5px 8px;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+#the-tool-button-submit {
+	display: none;
+}
+
+@media (min-width: 411px) {
+	.the-tool-line {
+		width: 18%;
+	}
+}
+
+@media (min-width: 600px) {
+	.the-tool-line {
+		width: 24%;
+	}
+}
+
+@media (min-width: 732px) {
+	.the-tool-line {
+		width: 26%;
+	}
+}
+
+@media (min-width: 961px) {
+	.the-tool-line {
+		width: 28%;
+	}
+}
+
+/** ----------------------- **/
