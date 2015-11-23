@@ -54,7 +54,12 @@ get_header(); ?>
 									<div class="category-question">On which group are you focusing in your study?</div>
 									
 									<div class="category-choice-container">
-									
+										
+										<div class="category-choice">Children</div>
+										<div class="category-choice">Adolescents</div>
+										<div class="category-choice">Adults</div>
+										<div class="category-choice">Elderly</div>
+										
 									</div>
 								</div>
 								
@@ -62,6 +67,31 @@ get_header(); ?>
 									<div class="category-question">What do you want to study?</div>
 									
 									<div class="category-choice-container">
+									
+										<div class="category-row">
+											<div class="category-choice">General well-being</div>
+											<div class="category-choice">Feelings</div>
+											<div class="category-choice">Life satisfaction</div>
+											<div class="category-choice">Flourishing</div>
+										</div>
+										
+										<div class="category-row">
+											<div class="category-choice">Resilience</div>
+											<div class="category-choice">Mindfulness</div>
+											<div class="category-choice">Self-esteem/Self-efficacy</div>
+										</div>
+										
+										<div class="category-row">
+											<div class="category-choice">Optimism</div>
+											<div class="category-choice">Meaning and purpose</div>
+											<div class="category-choice">Engagement</div>
+										</div>
+										
+										<div class="category-row">
+											<div class="category-choice">Autonomy</div>
+											<div class="category-choice">Commitment</div>
+											<div class="category-choice">Competence</div>
+										</div>
 									
 									</div>
 								</div>
@@ -71,6 +101,9 @@ get_header(); ?>
 									
 									<div class="category-choice-container">
 									
+										<div class="category-choice">Yes</div>
+										<div class="category-choice">No</div>
+									
 									</div>
 								</div>
 								
@@ -79,13 +112,26 @@ get_header(); ?>
 									
 									<div class="category-choice-container">
 									
+										<div class="category-row">
+											<div class="category-choice">Single-item</div>
+											<div class="category-choice">General indicators</div>
+											<div class="category-choice">2-10 items</div>
+										</div>
+										
+										<div class="category-row">
+											<div class="category-choice">11-20 items</div>
+											<div class="category-choice">21-30 items</div>
+											<div class="category-choice">more than 30 items</div>
+										</div>
+									
 									</div>
 								</div>
 							</div>
 							
 							<div class="the-tool-next">
-								<button class="the-tool-button" id="the-tool-button-next">Next</button> 
-								<button class="the-tool-button" id="the-tool-button-submit">Show me the results!</button> 
+								<button class="the-tool-button" id="the-tool-button-back">Step back</button> 
+								<button class="the-tool-button" id="the-tool-button-next">Next step</button> 
+								<button class="the-tool-button" id="the-tool-button-submit">Show me the results</button> 
 							</div>
 						
 						</div>

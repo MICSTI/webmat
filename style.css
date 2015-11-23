@@ -25,7 +25,8 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 
 .webmat-title {
 	font-size: 150%;
-	font-family: Corbel, Georgia, "Times New Roman", serif;
+	/*font-family: Corbel, Georgia, "Times New Roman", serif;*/
+	font-family: "Arial", Helvetica, Arial, sans-serif;
 	margin-bottom: 24px;
 }
 
@@ -246,14 +247,47 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 
 .category-question {
 	width: 100%;
-	margin-top: 16px;
+	margin: 16px 0px;
 	padding: 5px 8px;
 	font-weight: bold;
-	font-size: 1.2em;
+	font-size: 1.6em;
+	text-align: center;
+}
+
+.category-choice-container {
+	text-align: center;
+}
+
+.category-choice {
+	display: inline-block;
+    border: 1px solid #f7ca18;
+    padding: 8px 12px;
+    margin-right: 16px;
+    background-color: #fff;
+    font-size: 1.1em;
+}
+
+.category-choice-selected {
+	border: 1px solid #f7ca18;
+	background-color: #f7ca18;
+}
+
+.category-choice:hover {
+	cursor: pointer;
+	background-color: #f2da79;
+}
+
+.category-row {
+	margin-bottom: 12px;
 }
 
 #the-tool-button-submit {
 	display: none;
+}
+
+.the-tool-next {
+	margin-top: 24px;
+	text-align: center;
 }
 
 @media (min-width: 411px) {
