@@ -208,7 +208,7 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 	width: 20px;
 	height: 20px;
 	border-radius: 50%;
-	border: 5px solid cornflowerblue;
+	border: 5px solid #f7ca18;
 }
 
 .the-tool-circle:hover {
@@ -216,24 +216,24 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 }
 
 .the-tool-circle:not(.the-tool-category-selected):hover {
-	background-color: #9ab6e8;
+	background-color: #f2da79;
 }
 
 .the-tool-line {
 	position: relative;
 	top: -12px;
 	width: 10%;
-	background-color: cornflowerblue;
+	background-color: #f7ca18;
 	margin: 0px -4px;
 	height: 5px;
 }
 
 .the-tool-category-selected {
-	background-color: cornflowerblue;
+	background-color: #f7ca18;
 }
 
 .the-tool-category-selected:hover {
-	background-color: cornflowerblue !important;
+	background-color: #f7ca18 !important;
 }
 
 .the-tool-content {
