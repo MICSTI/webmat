@@ -55,10 +55,10 @@ get_header(); ?>
 									
 									<div class="category-choice-container">
 										
-										<div class="category-choice">Children</div>
-										<div class="category-choice">Adolescents</div>
-										<div class="category-choice">Adults</div>
-										<div class="category-choice">Elderly</div>
+										<div class="category-choice" data-id="children">Children</div>
+										<div class="category-choice" data-id="adolescents">Adolescents</div>
+										<div class="category-choice" data-id="adults">Adults</div>
+										<div class="category-choice" data-id="elderly">Elderly</div>
 										
 									</div>
 								</div>
@@ -69,28 +69,28 @@ get_header(); ?>
 									<div class="category-choice-container">
 									
 										<div class="category-row">
-											<div class="category-choice">General well-being</div>
-											<div class="category-choice">Feelings</div>
-											<div class="category-choice">Life satisfaction</div>
-											<div class="category-choice">Flourishing</div>
+											<div class="category-choice" data-id="general">General well-being</div>
+											<div class="category-choice" data-id="feeling">Feelings</div>
+											<div class="category-choice" data-id="life-satisfaction">Life satisfaction</div>
+											<div class="category-choice" data-id="flourishing">Flourishing</div>
 										</div>
 										
 										<div class="category-row">
-											<div class="category-choice">Resilience</div>
-											<div class="category-choice">Mindfulness</div>
-											<div class="category-choice">Self-esteem/Self-efficacy</div>
+											<div class="category-choice" data-id="resilience">Resilience</div>
+											<div class="category-choice" data-id="mindfulness">Mindfulness</div>
+											<div class="category-choice" data-id="self-esteem-efficacy">Self-esteem/Self-efficacy</div>
 										</div>
 										
 										<div class="category-row">
-											<div class="category-choice">Optimism</div>
-											<div class="category-choice">Meaning and purpose</div>
-											<div class="category-choice">Engagement</div>
+											<div class="category-choice" data-id="optimism">Optimism</div>
+											<div class="category-choice" data-id="meaning-purpose">Meaning and purpose</div>
+											<div class="category-choice" data-id="engagement">Engagement</div>
 										</div>
 										
 										<div class="category-row">
-											<div class="category-choice">Autonomy</div>
-											<div class="category-choice">Commitment</div>
-											<div class="category-choice">Competence</div>
+											<div class="category-choice" data-id="autonomy">Autonomy</div>
+											<div class="category-choice" data-id="commitment">Commitment</div>
+											<div class="category-choice" data-id="competence">Competence</div>
 										</div>
 									
 									</div>
@@ -101,7 +101,7 @@ get_header(); ?>
 									
 									<div class="category-choice-container">
 									
-										<div class="category-choice">Yes</div>
+										<div class="category-choice" data-id="workplace">Yes</div>
 										<div class="category-choice">No</div>
 									
 									</div>
@@ -113,15 +113,15 @@ get_header(); ?>
 									<div class="category-choice-container">
 									
 										<div class="category-row">
-											<div class="category-choice">Single-item</div>
-											<div class="category-choice">General indicators</div>
-											<div class="category-choice">2-10 items</div>
+											<div class="category-choice" data-id="items-single">Single-item</div>
+											<div class="category-choice" data-id="general-indicators">General indicators</div>
+											<div class="category-choice" data-id="items-2-10">2-10 items</div>
 										</div>
 										
 										<div class="category-row">
-											<div class="category-choice">11-20 items</div>
-											<div class="category-choice">21-30 items</div>
-											<div class="category-choice">more than 30 items</div>
+											<div class="category-choice" data-id="items-11-20">11-20 items</div>
+											<div class="category-choice" data-id="items-21-30">21-30 items</div>
+											<div class="category-choice" data-id="items-30-+">more than 30 items</div>
 										</div>
 									
 									</div>

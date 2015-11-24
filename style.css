@@ -272,7 +272,7 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 	background-color: #f7ca18;
 }
 
-.category-choice:hover {
+.no-touch .category-choice:hover {
 	cursor: pointer;
 	background-color: #f2da79;
 }
