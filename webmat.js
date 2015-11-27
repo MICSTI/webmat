@@ -14,14 +14,37 @@ var selectCategory = function(_id, _tabno) {
 	jQuery("#content-" + _id).addClass("the-tool-content-active");
 	jQuery("#category-" + _id).addClass("the-tool-category-selected");
 	
-	// change buttons
-	if (_tabno >= 4) {
-		jQuery("#the-tool-button-next").hide();
-		jQuery("#the-tool-button-submit").show();
-	} else {
-		jQuery("#the-tool-button-next").show();
-		jQuery("#the-tool-button-submit").hide();
+	// change buttons according to step position	
+	switch (_tabno) {
+		case 1:
+			jQuery("#the-tool-button-back").hide();
+			jQuery("#the-tool-button-next").show();
+			jQuery("#the-tool-button-submit").hide();
+			
+			break;
+			
+		case 4:
+			jQuery("#the-tool-button-back").show();
+			jQuery("#the-tool-button-next").hide();
+			jQuery("#the-tool-button-submit").show();
+			
+			break;
+			
+		default:
+			jQuery("#the-tool-button-back").show();
+			jQuery("#the-tool-button-next").show();
+			jQuery("#the-tool-button-submit").hide();
+		
+			break;
 	}
+}
+
+/**
+	Displays the tool, after the button on the welcome page has been clicked.
+*/
+var showTheTool = function() {
+	jQuery(".the-tool-intro").hide();
+	jQuery(".the-tool-wrapper").show();
 }
 
 /**
@@ -48,6 +71,9 @@ var submitToolForm = function() {
 
 jQuery(document).ready(function() {
 	var tabNo = 1;
+	
+	// welcome page
+	jQuery("#the-tool-button-start").on("click", showTheTool);
 	
 	// circle navigation
 	jQuery(".the-tool-circle").on("click", function() {
