@@ -50,7 +50,17 @@ get_header(); ?>
 							</div>
 							
 							<div class="the-tool-section">
-								<div class="the-tool-content the-tool-content-active" id="content-age">
+								<div class="the-tool-content the-tool-content-active" id="content-intro">
+									<div class="the-tool-welcome">
+										Welcome to The Tool!
+									</div>
+									
+									<div class="button-primary">
+										<button>Let's get started</button>
+									</div>
+								</div>
+							
+								<div class="the-tool-content" id="content-age">
 									<div class="category-question">On which group are you focusing in your study?</div>
 									
 									<div class="category-choice-container">
@@ -84,8 +94,8 @@ get_header(); ?>
 							</div>
 							
 							<div class="the-tool-next">
-								<button class="the-tool-button" id="the-tool-button-next">Next</button> 
-								<button class="the-tool-button" id="the-tool-button-submit">Show me the results!</button> 
+								<button class="the-tool-button button-primary"  id="the-tool-button-next">Next</button> 
+								<button class="the-tool-button button-primary" id="the-tool-button-submit">Show me the results!</button> 
 							</div>
 						
 						</div>
