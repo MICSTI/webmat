@@ -400,7 +400,8 @@ a:hover {
   padding-left: 40px;
   padding-right: 40px;
   background: #ffffff url('../images/absurdidad.png') 0 0 repeat;
-  font-family: Georgia, "Times New Roman", serif;
+  /*font-family: Georgia, "Times New Roman", serif;*/
+  font-family: "Arial", Helvetica, Arial, sans-serif;
   font-size: 20px;
   line-height: 28px;
 }
@@ -412,7 +413,8 @@ a:hover {
   background: #ffffff url('../images/absurdidad.png') 0 0 repeat;
 }
 .page-header h1 {
-  font-family: Georgia, "Times New Roman", serif;
+  /*font-family: Georgia, "Times New Roman", serif;*/
+  font-family: "Arial", Helvetica, Arial, sans-serif;
   font-size: 20px;
   line-height: 28px;
 }
@@ -476,7 +478,8 @@ a:hover {
 h1,
 h2,
 h3 {
-  font-family: Georgia, "Times New Roman", serif;
+  /*font-family: Georgia, "Times New Roman", serif;*/
+  font-family: "Arial", Helvetica, Arial, sans-serif;
 }
 .site-content .entry-content h1,
 .site-content .comment-content h1,
@@ -561,7 +564,8 @@ h3 {
 .site-content .comment-content blockquote:before,
 #tinymce blockquote:before {
   content: '\0201C';
-  font-family: Georgia, 'Times New Roman', serif;
+  /*font-family: Georgia, 'Times New Roman', serif;*/
+  font-family: "Arial", Helvetica, Arial, sans-serif;
   font-size: 50px;
   position: absolute;
   left: 40px;
@@ -1304,6 +1308,11 @@ a.wpm-button:hover {
   }
 }
 @media (min-width: 900px) {
+  .navigation-main {
+	  margin-top: -30px;
+  }
+}
+@media (min-width: 1021px) {
   .navigation-main {
 	  margin-top: -60px;
   }

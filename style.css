@@ -25,7 +25,8 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 
 .webmat-title {
 	font-size: 150%;
-	font-family: Corbel, Georgia, "Times New Roman", serif;
+	/*font-family: Corbel, Georgia, "Times New Roman", serif;*/
+	font-family: "Arial", Helvetica, Arial, sans-serif;
 	margin-bottom: 24px;
 }
 
@@ -213,7 +214,7 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 	width: 20px;
 	height: 20px;
 	border-radius: 50%;
-	border: 5px solid cornflowerblue;
+	border: 5px solid #f7ca18;
 }
 
 .the-tool-circle:hover {
@@ -221,24 +222,24 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 }
 
 .the-tool-circle:not(.the-tool-category-selected):hover {
-	background-color: #9ab6e8;
+	background-color: #f2da79;
 }
 
 .the-tool-line {
 	position: relative;
 	top: -12px;
 	width: 10%;
-	background-color: cornflowerblue;
+	background-color: #f7ca18;
 	margin: 0px -4px;
 	height: 5px;
 }
 
 .the-tool-category-selected {
-	background-color: cornflowerblue;
+	background-color: #f7ca18;
 }
 
 .the-tool-category-selected:hover {
-	background-color: cornflowerblue !important;
+	background-color: #f7ca18 !important;
 }
 
 .the-tool-content {
@@ -251,14 +252,47 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 
 .category-question {
 	width: 100%;
-	margin-top: 16px;
+	margin: 16px 0px;
 	padding: 5px 8px;
 	font-weight: bold;
-	font-size: 1.2em;
+	font-size: 1.6em;
+	text-align: center;
+}
+
+.category-choice-container {
+	text-align: center;
+}
+
+.category-choice {
+	display: inline-block;
+    border: 1px solid #f7ca18;
+    padding: 8px 12px;
+    margin-right: 16px;
+    background-color: #fff;
+    font-size: 1.1em;
+}
+
+.category-choice-selected {
+	border: 1px solid #f7ca18;
+	background-color: #f7ca18;
+}
+
+.no-touch .category-choice:hover {
+	cursor: pointer;
+	background-color: #f2da79;
+}
+
+.category-row {
+	margin-bottom: 12px;
 }
 
 #the-tool-button-previous, #the-tool-button-next, #the-tool-button-submit {
 	display: none;
+}
+
+.the-tool-next {
+	margin-top: 24px;
+	text-align: center;
 }
 
 @media (min-width: 411px) {

@@ -57,7 +57,7 @@ get_header(); ?>
                                 $workplace = isset($_POST["workplace"]) ? TRUE : FALSE;
 
                                 $items_single = isset($_POST["items-single"]) ? TRUE : FALSE;
-                                $general_indicators = isset($_POST["general_indicators"]) ? TRUE : FALSE;
+                                $general_indicators = isset($_POST["general-indicators"]) ? TRUE : FALSE;
                                 $items_2_10 = isset($_POST["items-2-10"]) ? TRUE : FALSE;
                                 $items_11_20 = isset($_POST["items-11-20"]) ? TRUE : FALSE;
                                 $items_21_30 = isset($_POST["items-21-30"]) ? TRUE : FALSE;

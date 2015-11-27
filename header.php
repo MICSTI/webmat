@@ -14,7 +14,7 @@
 <title><?php wp_title( '|', true, 'right' ); ?></title>
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-<link rel="icon" type="image/png" href="http://webmat.micsti.at/wp-content/uploads/2015/11/webmat-logo.png" />
+<link rel="icon" type="image/png" href="http://webmat.micsti.at/wp-content/uploads/2015/11/logo31-50x50.png" />
 <!--[if lt IE 9]>
 <script src="<?php echo get_template_directory_uri(); ?>/js/html5.js" type="text/javascript"></script>
 <![endif]-->
@@ -29,7 +29,7 @@
 		<div class="site-branding">
 			<div class="site-title-group">
 				<h1 class="site-title"><div id="mylogo">
-<img src="http://webmat.micsti.at/wp-content/uploads/2015/11/webmat-logo.png" />
+<img src="http://webmat.micsti.at/wp-content/uploads/2015/11/logo31.png" />
 </div><a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
 				<h2 class="site-description"><?php bloginfo( 'description' ); ?></h2>
 			</div>
