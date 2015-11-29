@@ -46,9 +46,10 @@ get_header(); ?>
 						</div>
 						
 						<div class="the-tool-wrapper">
+							<!--
 							<div class="question">Please tick the boxes below and tick all boxes that are appropriate for your study.</div>
 							
-							<div class="page-info">It is possible that there are no results shown for your selection. That is because the measurements included now have been systematically selected.</div>
+							<div class="page-info">It is possible that there are no results shown for your selection. That is because the measurements included now have been systematically selected.</div>-->
 							
 							<div class="the-tool-container">
 								<div class="the-tool-progress">
