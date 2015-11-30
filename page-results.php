@@ -263,10 +263,10 @@ get_header(); ?>
 									echo "<script type='text/javascript'>";
 										echo "function toggleDisplay(_id) { var elem = document.getElementById(_id); elem.style.display = elem.style.display == 'block' ? 'none' : 'block'; }";
 									echo "</script>";
-								} else {
-									echo "<div class='no-results-found'>Sorry, but you didn't select any item from the list.</div>";
 								}
-                            }
+                            } else {
+								echo "<div class='no-results-found'>Sorry, but you didn't select any box.</div>";
+							}
                         ?>
 
                         <div id="button-back">
