@@ -70,7 +70,16 @@ var submitToolForm = function() {
 }
 
 jQuery(document).ready(function() {
-	var tabNo = 1;
+	// check if we should switch to a specific question
+	var hash = window.location.hash;
+	
+	if (hash.startsWith("#question-")) {
+		var tabNo = parseInt(hash.substr("#question-".length));
+		
+		showTheTool();
+	} else {
+		var tabNo = 1;
+	}
 	
 	// welcome page
 	jQuery("#the-tool-button-start").on("click", showTheTool);
@@ -109,5 +118,5 @@ jQuery(document).ready(function() {
 	// add no-touch class for hover problem on touch devices
 	if (!("ontouchstart" in document.documentElement)) {
 		document.documentElement.className += " no-touch";
-}
+	}
 });

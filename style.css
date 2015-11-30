@@ -45,7 +45,11 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 	outline: none;
 }
 
-.webmat-button:hover {
+.webmat-results {
+	margin: 0px !important;
+}
+
+.no-touch .webmat-button:hover {
 	background-color: #6e6e6e;
 }
 
@@ -225,7 +229,12 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 }
 
 .the-tool-intro-text {
-	margin-bottom: 24px;
+	font-size: 120%;
+	margin-bottom: 16px;
+}
+
+.the-tool-intro-text div {
+	margin-bottom: 16px;
 }
 
 .the-tool-wrapper {

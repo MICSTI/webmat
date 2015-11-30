@@ -30,14 +30,18 @@ get_header(); ?>
 					</header><!-- .entry-header -->
 
 					<div class="entry-content">
-					
-						<div class="webmat-title">The Tool</div>
 						
 						<div class="the-tool-intro">
 							<div class="category-question">Welcome to The Tool</div>
 							
 							<div class="the-tool-intro-text">
-								words words words
+								<div>
+									There are some questions following which are about different aspects regarding your study. You can select as many boxes as you like at each question. It is possible that there are no results shown for your selection. That is because the measurements included now have been systematically selected. In that case you can try to choose fewer boxes at one question or to take a broader approach for example with not ticking any box for the last question.
+								</div>
+								
+								<div>
+									Please keep in mind that "The Tool" is now still a beta version and that there are still improvements made.
+								</div>
 							</div>
 							
 							<div>

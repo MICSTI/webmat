@@ -210,7 +210,8 @@ get_header(); ?>
 										$rows = $query->rowCount();
 
 										if ($rows > 0) {
-											echo "<h1 class='entry-title'>Results</h1>";
+											//echo "<h1 class='entry-title'>Results</h1>";
+											echo "<div class='webmat-title'>Results</div>";
 											echo "<div class='results-title'>Here are your appropriate results listed. Please click on each measurement for further information.</div>";
 											
 											$count = 1;
@@ -269,7 +270,7 @@ get_header(); ?>
                         ?>
 
                         <div id="button-back">
-							<input type="button" value="Back to selection" onclick="javascript:window.history.back()" />
+							<button class="webmat-button webmat-results" onclick="window.location.href='../the-tool/#question-1'">Back to the start</button> 
 	                    </div>
 
 
