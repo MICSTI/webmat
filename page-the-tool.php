@@ -146,9 +146,9 @@ get_header(); ?>
 								</div>
 								
 								<div class="the-tool-next">
-									<button class="webmat-button" id="the-tool-button-back">Step back</button> 
-									<button class="webmat-button" id="the-tool-button-next">Next step</button> 
-									<button class="webmat-button" id="the-tool-button-submit">Show me the results</button> 
+									<div><button class="webmat-button" id="the-tool-button-back">Step back</button></div>
+									<div><button class="webmat-button" id="the-tool-button-next">Next step</button></div>
+									<div><button class="webmat-button" id="the-tool-button-submit">Show me the results</button></div>
 								</div>
 							
 							</div>

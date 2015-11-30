@@ -334,6 +334,10 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 	text-align: center;
 }
 
+.the-tool-next div {
+	display: inline-block;
+}
+
 @media (min-width: 411px) {
 	.the-tool-line {
 		width: 18%;
@@ -355,6 +359,24 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 @media (min-width: 961px) {
 	.the-tool-line {
 		width: 28%;
+	}
+}
+
+@media (max-width: 690px) {
+	.category-choice {
+		display: block;
+		margin-bottom: 12px;
+	}
+	
+	.category-row {
+		margin-bottom: 0px;
+	}
+}
+
+@media (max-width: 500px) {
+	.the-tool-next div {
+		display: block;
+		margin-bottom: 16px;
 	}
 }
 
