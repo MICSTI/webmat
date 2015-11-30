@@ -81,9 +81,6 @@ jQuery(document).ready(function() {
 		var tabNo = 1;
 	}
 	
-	// welcome page
-	jQuery("#the-tool-button-start").on("click", showTheTool);
-	
 	// circle navigation
 	jQuery(".the-tool-circle").on("click", function() {
 		// select tab

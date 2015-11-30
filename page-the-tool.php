@@ -45,7 +45,7 @@ get_header(); ?>
 							</div>
 							
 							<div>
-								<button class="webmat-button" id="the-tool-button-start">Let's start</button>
+								<button class="webmat-button" id="the-tool-button-start" onclick="showTheTool()">Let's start</button>
 							</div>
 						</div>
 						
