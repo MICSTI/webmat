@@ -224,7 +224,12 @@ get_header(); ?>
 												$no_items = $row["kw_items"];
 												
 												echo "<div class='result'>";
-													echo "<div class='result-title' onclick=\"toggleDisplay('" . $id . "')\">" . $row["name"] . "</div>";
+													echo "<div class='result-title' onclick=\"toggleDisplay('" . $id . "')\">";
+														echo  "<span id='" . $id . "-plus' class='detail-indicator detail-indicator-plus'>+</span>";
+														echo  "<span id='" . $id . "-minus' class='detail-indicator detail-indicator-minus'>-</span>";
+														
+														echo  "<span>" . $row["name"] . "</span>";
+													echo "</div>";
 													
 													echo "<div class='result-details' id='" . $id . "'>";
 														echo "<div>" . $row["abstract"] . "</div>";
@@ -245,7 +250,7 @@ get_header(); ?>
 															}
 														}
 														
-														$study_details = empty($row["original_study_details"]) ? $row["secondary_study_details"]: $row["original_study_details"];
+														$study_details = empty($row["original_study_details"]) ? $row["secondary_study_details"] : $row["original_study_details"];
 														echo "<div>" . $study_details . "</div>";
 													echo "</div>";
 												echo "</div>";
@@ -260,9 +265,32 @@ get_header(); ?>
 										echo $ex;
 									}
 									
-									echo "<script type='text/javascript'>";
+									// build javascript function block
+									$html = "";
+									$html .= "<script type='text/javascript'>";
+										$html .= "function toggleDisplay(_id) { ";
+											$html .= "var elem = document.getElementById(_id);";
+											$html .= "var plus = document.getElementById(_id + '-plus');";
+											$html .= "var minus = document.getElementById(_id + '-minus');";
+											
+											$html .= "if (elem.style.display == 'block') {";
+												$html .= "elem.style.display = 'none';";
+												$html .= "plus.style.display = 'inline-block';";
+												$html .= "minus.style.display = 'none';";
+											$html .= "} else {";
+												$html .= "elem.style.display = 'block';";
+												$html .= "plus.style.display = 'none';";
+												$html .= "minus.style.display = 'inline-block';";
+											$html .= "}";
+											
+										$html .= " }";
+									$html .= "</script>";
+									
+									echo $html;
+									
+									/*echo "<script type='text/javascript'>";
 										echo "function toggleDisplay(_id) { var elem = document.getElementById(_id); elem.style.display = elem.style.display == 'block' ? 'none' : 'block'; }";
-									echo "</script>";
+									echo "</script>";*/
 								}
                             } else {
 								echo "<div class='no-results-found'>Sorry, but you didn't select any box.</div>";

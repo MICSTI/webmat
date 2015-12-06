@@ -72,7 +72,7 @@
 								$html .= "<div>This is a single-item scale.</div>";
 							}
 							
-							$study_details = empty($row["original_study_details"]) ? $row["secondary_study_details"]: $row["original_study_details"];
+							$study_details = empty($row["original_study_details"]) ? $row["secondary_study_details"] : $row["original_study_details"];
 							$html .= "<div>" . $study_details . "</div>";
 						$html .= "</div>";
 					$html .= "</div>";
