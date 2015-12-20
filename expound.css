@@ -424,6 +424,9 @@ a:hover {
   margin-bottom: 0;
   margin-top: 10px;
 }
+.entry-content {
+	font-size: 12pt;
+}
 .featured-content-secondary {
   padding-top: 40px;
   padding-bottom: 20px;

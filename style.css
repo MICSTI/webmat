@@ -39,7 +39,7 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
     border: none;
     font-weight: bold;
     cursor: pointer;
-    font-size: 120%;
+    font-size: 12pt;
     border-radius: 10px;
 	margin: 0px 12px;
 	outline: none;
@@ -268,7 +268,7 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 }
 
 .the-tool-intro-text {
-	font-size: 120%;
+	font-size: 12pt;
 	margin-bottom: 16px;
 }
 
@@ -329,7 +329,7 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 	margin: 16px 0px;
 	padding: 5px 8px;
 	font-weight: bold;
-	font-size: 1.6em;
+	font-size: 16pt;
 	text-align: center;
 }
 
@@ -343,7 +343,7 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
     padding: 8px 12px;
     margin-right: 16px;
     background-color: #fff;
-    font-size: 1.1em;
+    font-size: 11pt;
 }
 
 .category-choice-selected {
