@@ -1,9 +1,11 @@
 body {
-  background: #ffb81c;
+  /*background: #ffb81c;*/
   /*background: #999;*/
+  background: #fff;
 
   font: 13px/20px "Arial", Helvetica, Arial, sans-serif;
   font-weight: 300;
+  
 
 }
 pre,
@@ -52,6 +54,7 @@ a:hover {
 }
 .site-header .site-branding {
   position: relative;
+  background-color: #ffb81c;
 }
 .site-title-group {
   margin: 50px 40px 50px 40px;

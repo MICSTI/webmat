@@ -57,7 +57,7 @@ var submitToolForm = function() {
 					action: '../results',
 					style: 'display: none;'
 				}).appendTo('body');
-				
+					
 	jQuery(".category-choice-selected").each(function(idx, item) {
 		var elem = jQuery(item).attr("data-id");
 		
@@ -70,6 +70,15 @@ var submitToolForm = function() {
 }
 
 jQuery(document).ready(function() {
+	// add page background color
+	var nav = jQuery("#site-navigation");
+	
+	var nav_height = nav.offset().top + (nav.outerHeight() / 2);
+	
+	jQuery('<div>', {
+		style: 'position: absolute; left: 0; top: 0; width: 100%; height: ' + nav_height + 'px; background-color: #ffb81c; z-index: -1;'
+	}).insertBefore('#page');
+	
 	// check if we should switch to a specific question
 	var hash = window.location.hash;
 	

@@ -17,6 +17,11 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 @import url('css/expound.css?v=20140129');
 
 /* ------ WEBMAT CSS ------ */
+#site-navigation {
+	position: relative;
+    top: 20px;
+}
+
 #mylogo {
 	float: right;
 	position: relative;
@@ -375,6 +380,13 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 
 .the-tool-next div {
 	display: inline-block;
+}
+
+@media (max-width: 900px) {
+	#site-navigation {
+		position: relative;
+		top: 0px;
+	}
 }
 
 @media (min-width: 411px) {
