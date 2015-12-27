@@ -127,7 +127,6 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 
 .result-details {
 	display: none;
-	
 	padding: 4px 8px;
 	background-color: #fff5ee;
 }
@@ -145,7 +144,7 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 }
 
 #button-back {
-	margin-top: 16px;
+	margin-top: 32px;
 }
 
 .h1 {
@@ -226,7 +225,6 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 
 /** ------- RESULT SURVEY ------- **/
 .survey-paragraph {
-	margin-bottom: 12px;
 	padding: 6px 9px;
 }
 
@@ -242,7 +240,6 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 }
 
 .survey-paragraph-question {
-	display: none;
 	font-size: 11pt;
 }
 
@@ -260,6 +257,14 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 	border-radius: 30px;
 	margin-top: 36px;
 	background: #eee;
+}
+
+#survey-content {
+	display: none;
+}
+
+#survey-content-toggle:hover {
+	cursor: pointer;
 }
 /** ----------------------------- **/
 
