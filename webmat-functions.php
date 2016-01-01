@@ -1,4 +1,7 @@
 <?php
+	// Default time zone
+	date_default_timezone_set("Europe/Vienna");
+
 	function getGroupPageContent($category, $host, $db_name, $db_user, $password) {
 		$html = "";
 		
@@ -106,4 +109,70 @@
 		$html .= "</script>";
 		
 		return $html;
+	}
+	
+	function addRequestMetaData($db, $ip) {
+		$timestamp = date('Y-m-d H:i:s');
+		
+		$browser = get_browser(null, true);
+		
+		$os = $browser["platform"];
+		$browser_name = $browser["browser"];
+		$browser_version = $browser["version"];
+		
+		$query = $db->prepare("INSERT INTO the_tool_data (timestamp, ip, os, browser_name, browser_version) VALUES (:timestamp, :ip, :os, :browser_name, :browser_version)");
+		
+		$query->execute( array(':timestamp' => $timestamp, ':ip' => $ip, ':os' => $os, ':browser_name' => $browser_name, ':browser_version' => $browser_version) );
+		
+		return $db->lastInsertId();
+	}
+	
+	function addRequestDetails($db, $request_id, $post) {
+		// The tool constants
+	$KEY_DISPLAY = "display";
+	$KEY_PROPERTY = "property";
+	
+	$FIELDS = array( "Age" => array( array($KEY_PROPERTY => "children", $KEY_DISPLAY => "Children"),
+									 array($KEY_PROPERTY => "adolescents", $KEY_DISPLAY => "Adolescents"),
+									 array($KEY_PROPERTY => "adults", $KEY_DISPLAY => "Adults"),
+									 array($KEY_PROPERTY => "elderly", $KEY_DISPLAY => "Elderly") ),
+					 "Type" => array( array($KEY_PROPERTY => "general", $KEY_DISPLAY => "General"),
+									array($KEY_PROPERTY => "feeling", $KEY_DISPLAY => "Feeling"),
+									array($KEY_PROPERTY => "life-satisfaction", $KEY_DISPLAY => "Life satisfaction"),
+									array($KEY_PROPERTY => "flourishing", $KEY_DISPLAY => "Flourishing"),
+									array($KEY_PROPERTY => "resilience", $KEY_DISPLAY => "Resilience"),
+									array($KEY_PROPERTY => "mindfulness", $KEY_DISPLAY => "Mindfulness"),
+									array($KEY_PROPERTY => "self-esteem-efficacy", $KEY_DISPLAY => "Self esteem / efficacy"),
+									array($KEY_PROPERTY => "optimism", $KEY_DISPLAY => "Optimism"),
+									array($KEY_PROPERTY => "meaning-purpose", $KEY_DISPLAY => "Meaning / Purpose"),
+									array($KEY_PROPERTY => "engagement", $KEY_DISPLAY => "Engagement"),
+									array($KEY_PROPERTY => "autonomy", $KEY_DISPLAY => "Autonomy"),
+									array($KEY_PROPERTY => "commitment", $KEY_DISPLAY => "Commitment"),
+									array($KEY_PROPERTY => "competence", $KEY_DISPLAY => "Competence") ),
+					 "Workplace" => array( array($KEY_PROPERTY => "workplace", $KEY_DISPLAY => "Workplace") ),
+					 "Items" => array( array($KEY_PROPERTY => "items-single", $KEY_DISPLAY => "Single-item"),
+									array($KEY_PROPERTY => "general-indicators", $KEY_DISPLAY => "General indicators"),
+									array($KEY_PROPERTY => "items-2-10", $KEY_DISPLAY => "2-10 items"),
+									array($KEY_PROPERTY => "items-11-20", $KEY_DISPLAY => "11-20 items"),
+									array($KEY_PROPERTY => "items-21-30", $KEY_DISPLAY => "21-30 items"),
+									array($KEY_PROPERTY => "items-30+", $KEY_DISPLAY => "30+ items") )
+					);
+		
+		$categories = array_keys($FIELDS);
+		
+		// iterate over categories
+		foreach ($categories as $category) {
+			$items = $FIELDS[$category];
+			
+			// iterate over items in this category
+			foreach ($items as $item) {
+				$property = $item[$KEY_PROPERTY];
+				$value = array_key_exists($property, $post) ? 1 : 0;
+				
+				// build db query string
+				$query = $db->prepare("INSERT INTO the_tool_details (request_id, prop, value) VALUES (:request_id, :prop, :value);");
+		
+				$query->execute( array(':request_id' => $request_id, ':prop' => $property, ':value' => $value) );
+			}
+		}
 	}

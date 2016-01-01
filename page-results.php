@@ -203,6 +203,15 @@ get_header(); ?>
 										$db = new PDO('mysql:host=' . $DATABASE_HOST . ';dbname=' . $DATABASE_NAME . ';charset=utf8', $DATABASE_USER, $DATABASE_PASSWORD);
 										$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 										$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+										
+										// save request to database
+										$ip = $_SERVER['REMOTE_ADDR'];
+										
+										// request meta data
+										$request_id = addRequestMetaData($db, $ip);
+										
+										// request details
+										addRequestDetails($db, $request_id, $_POST);
 
 										$query = $db->prepare("SELECT name, kw_single_item, kw_general_indicators, kw_items, abstract, keywords, example_items, original_study_details, secondary_study_details FROM measure_data WHERE " . $where_query);
 										$query->execute();
@@ -224,6 +233,9 @@ get_header(); ?>
 												$no_items = $row["kw_items"];
 												
 												echo "<div class='result'>";
+													// add request id as a hidden field
+													echo "<input type='hidden' id='request-id' value='" . $request_id . "' />";
+												
 													echo "<div class='result-title' onclick=\"toggleDisplay('" . $id . "')\">";
 														echo  "<span id='" . $id . "-plus' class='detail-indicator detail-indicator-plus'>+</span>";
 														echo  "<span id='" . $id . "-minus' class='detail-indicator detail-indicator-minus'>-</span>";
