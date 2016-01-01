@@ -155,7 +155,7 @@
 									array($KEY_PROPERTY => "items-2-10", $KEY_DISPLAY => "2-10 items"),
 									array($KEY_PROPERTY => "items-11-20", $KEY_DISPLAY => "11-20 items"),
 									array($KEY_PROPERTY => "items-21-30", $KEY_DISPLAY => "21-30 items"),
-									array($KEY_PROPERTY => "items-30+", $KEY_DISPLAY => "30+ items") )
+									array($KEY_PROPERTY => "items-30-+", $KEY_DISPLAY => "30+ items") )
 					);
 		
 		$categories = array_keys($FIELDS);

@@ -61,7 +61,7 @@ get_header(); ?>
                                 $items_2_10 = isset($_POST["items-2-10"]) ? TRUE : FALSE;
                                 $items_11_20 = isset($_POST["items-11-20"]) ? TRUE : FALSE;
                                 $items_21_30 = isset($_POST["items-21-30"]) ? TRUE : FALSE;
-                                $items_30 = isset($_POST["items-30+"]) ? TRUE : FALSE;
+                                $items_30 = isset($_POST["items-30-+"]) ? TRUE : FALSE;
 
                                 // age group
                                     $group_age = array();
