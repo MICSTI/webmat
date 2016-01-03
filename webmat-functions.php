@@ -1,6 +1,49 @@
 <?php
 	// Default time zone
 	date_default_timezone_set("Europe/Vienna");
+	
+	// The tool constants
+	$KEY_DISPLAY = "display";
+	$KEY_PROPERTY = "property";
+	$KEY_OPTIONS = "options";
+	
+	$FIELDS_TOOL = array( "Age" => array( array($KEY_PROPERTY => "children", $KEY_DISPLAY => "Children"),
+									 array($KEY_PROPERTY => "adolescents", $KEY_DISPLAY => "Adolescents"),
+									 array($KEY_PROPERTY => "adults", $KEY_DISPLAY => "Adults"),
+									 array($KEY_PROPERTY => "elderly", $KEY_DISPLAY => "Elderly") ),
+					 "Type" => array( array($KEY_PROPERTY => "general", $KEY_DISPLAY => "General"),
+									array($KEY_PROPERTY => "feeling", $KEY_DISPLAY => "Feeling"),
+									array($KEY_PROPERTY => "life-satisfaction", $KEY_DISPLAY => "Life satisfaction"),
+									array($KEY_PROPERTY => "flourishing", $KEY_DISPLAY => "Flourishing"),
+									array($KEY_PROPERTY => "resilience", $KEY_DISPLAY => "Resilience"),
+									array($KEY_PROPERTY => "mindfulness", $KEY_DISPLAY => "Mindfulness"),
+									array($KEY_PROPERTY => "self-esteem-efficacy", $KEY_DISPLAY => "Self esteem / efficacy"),
+									array($KEY_PROPERTY => "optimism", $KEY_DISPLAY => "Optimism"),
+									array($KEY_PROPERTY => "meaning-purpose", $KEY_DISPLAY => "Meaning / Purpose"),
+									array($KEY_PROPERTY => "engagement", $KEY_DISPLAY => "Engagement"),
+									array($KEY_PROPERTY => "autonomy", $KEY_DISPLAY => "Autonomy"),
+									array($KEY_PROPERTY => "commitment", $KEY_DISPLAY => "Commitment"),
+									array($KEY_PROPERTY => "competence", $KEY_DISPLAY => "Competence") ),
+					 "Workplace" => array( array($KEY_PROPERTY => "workplace", $KEY_DISPLAY => "Workplace") ),
+					 "Items" => array( array($KEY_PROPERTY => "items-single", $KEY_DISPLAY => "Single-item"),
+									array($KEY_PROPERTY => "general-indicators", $KEY_DISPLAY => "General indicators"),
+									array($KEY_PROPERTY => "items-2-10", $KEY_DISPLAY => "2-10 items"),
+									array($KEY_PROPERTY => "items-11-20", $KEY_DISPLAY => "11-20 items"),
+									array($KEY_PROPERTY => "items-21-30", $KEY_DISPLAY => "21-30 items"),
+									array($KEY_PROPERTY => "items-30-+", $KEY_DISPLAY => "30+ items") )
+					);
+					
+	$FIELDS_SURVEY = array( "Questions" => array( array($KEY_PROPERTY => "helpful", $KEY_DISPLAY => "Have the suggestions been helpful for choosing a measurement?", $KEY_OPTIONS => array("yes" => "Yes", "no" => "No")),
+												array($KEY_PROPERTY => "purpose", $KEY_DISPLAY => "What is the purpose of your study?"),
+												array($KEY_PROPERTY => "occupation", $KEY_DISPLAY => "Are you a..."),
+												array($KEY_PROPERTY => "occupation-other", $KEY_DISPLAY => "Other occupation entries"),
+												array($KEY_PROPERTY => "country", $KEY_DISPLAY => "In which country are you working?"),
+												array($KEY_PROPERTY => "nature", $KEY_DISPLAY => "What is the nature of work you are doing?"),
+												array($KEY_PROPERTY => "based", $KEY_DISPLAY => "Where are you currently based?"),
+												array($KEY_PROPERTY => "funded", $KEY_DISPLAY => "Is your work funded?"),
+												array($KEY_PROPERTY => "use", $KEY_DISPLAY => "Are you going to use the recommendations from the tool?")
+											)
+					);
 
 	function getGroupPageContent($category, $host, $db_name, $db_user, $password) {
 		$html = "";
@@ -127,52 +170,51 @@
 		return $db->lastInsertId();
 	}
 	
-	function addRequestDetails($db, $request_id, $post) {
-		// The tool constants
-	$KEY_DISPLAY = "display";
-	$KEY_PROPERTY = "property";
-	
-	$FIELDS = array( "Age" => array( array($KEY_PROPERTY => "children", $KEY_DISPLAY => "Children"),
-									 array($KEY_PROPERTY => "adolescents", $KEY_DISPLAY => "Adolescents"),
-									 array($KEY_PROPERTY => "adults", $KEY_DISPLAY => "Adults"),
-									 array($KEY_PROPERTY => "elderly", $KEY_DISPLAY => "Elderly") ),
-					 "Type" => array( array($KEY_PROPERTY => "general", $KEY_DISPLAY => "General"),
-									array($KEY_PROPERTY => "feeling", $KEY_DISPLAY => "Feeling"),
-									array($KEY_PROPERTY => "life-satisfaction", $KEY_DISPLAY => "Life satisfaction"),
-									array($KEY_PROPERTY => "flourishing", $KEY_DISPLAY => "Flourishing"),
-									array($KEY_PROPERTY => "resilience", $KEY_DISPLAY => "Resilience"),
-									array($KEY_PROPERTY => "mindfulness", $KEY_DISPLAY => "Mindfulness"),
-									array($KEY_PROPERTY => "self-esteem-efficacy", $KEY_DISPLAY => "Self esteem / efficacy"),
-									array($KEY_PROPERTY => "optimism", $KEY_DISPLAY => "Optimism"),
-									array($KEY_PROPERTY => "meaning-purpose", $KEY_DISPLAY => "Meaning / Purpose"),
-									array($KEY_PROPERTY => "engagement", $KEY_DISPLAY => "Engagement"),
-									array($KEY_PROPERTY => "autonomy", $KEY_DISPLAY => "Autonomy"),
-									array($KEY_PROPERTY => "commitment", $KEY_DISPLAY => "Commitment"),
-									array($KEY_PROPERTY => "competence", $KEY_DISPLAY => "Competence") ),
-					 "Workplace" => array( array($KEY_PROPERTY => "workplace", $KEY_DISPLAY => "Workplace") ),
-					 "Items" => array( array($KEY_PROPERTY => "items-single", $KEY_DISPLAY => "Single-item"),
-									array($KEY_PROPERTY => "general-indicators", $KEY_DISPLAY => "General indicators"),
-									array($KEY_PROPERTY => "items-2-10", $KEY_DISPLAY => "2-10 items"),
-									array($KEY_PROPERTY => "items-11-20", $KEY_DISPLAY => "11-20 items"),
-									array($KEY_PROPERTY => "items-21-30", $KEY_DISPLAY => "21-30 items"),
-									array($KEY_PROPERTY => "items-30-+", $KEY_DISPLAY => "30+ items") )
-					);
-		
-		$categories = array_keys($FIELDS);
+	function addRequestDetails($db, $request_id, $post, $fields, $key_property) {
+		$categories = array_keys($fields);
 		
 		// iterate over categories
 		foreach ($categories as $category) {
-			$items = $FIELDS[$category];
+			$items = $fields[$category];
 			
 			// iterate over items in this category
 			foreach ($items as $item) {
-				$property = $item[$KEY_PROPERTY];
+				$property = $item[$key_property];
 				$value = array_key_exists($property, $post) ? 1 : 0;
 				
 				// build db query string
 				$query = $db->prepare("INSERT INTO the_tool_details (request_id, prop, value) VALUES (:request_id, :prop, :value);");
 		
 				$query->execute( array(':request_id' => $request_id, ':prop' => $property, ':value' => $value) );
+			}
+		}
+	}
+	
+	function addRequestMail($db, $request_id, $mail) {
+		$query = $db->prepare("UPDATE the_tool_data SET mail = :mail WHERE id = :request_id");
+		
+		$query->execute( array(':mail' => $mail, ':request_id' => $request_id) );
+	}
+	
+	function addSurveyDetails($db, $request_id, $post, $fields, $key_property) {
+		$categories = array_keys($fields);
+		
+		// iterate over categories
+		foreach ($categories as $category) {
+			$items = $fields[$category];
+			
+			echo $items;
+				
+			foreach ($items as $item) {
+				$property = $item[$key_property];
+				$value = isset($post[$property]) ? trim($post[$property]) : null;
+				
+				if ($value != null) {
+					// build db query string
+					$query = $db->prepare("INSERT INTO the_tool_survey (request_id, prop, value) VALUES (:request_id, :prop, :value);");
+			
+					$query->execute( array(':request_id' => $request_id, ':prop' => $property, ':value' => $value) );
+				}
 			}
 		}
 	}

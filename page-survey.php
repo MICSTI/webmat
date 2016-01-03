@@ -12,6 +12,34 @@
 
 get_header(); ?>
 
+	<?php
+		if ($_POST) {
+			// save survey details
+			$request_id = isset($_POST["request-id"]) ? $_POST["request-id"] : null;
+			
+			if ($request_id != null) {
+				try {
+					$db = new PDO('mysql:host=' . $DATABASE_HOST . ';dbname=' . $DATABASE_NAME . ';charset=utf8', $DATABASE_USER, $DATABASE_PASSWORD);
+					$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+					$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+					
+					// add survey details to db
+					addSurveyDetails($db, $request_id, $_POST, $FIELDS_SURVEY, $KEY_PROPERTY);
+					
+					// add mail address also if it was set
+					$mail = isset($_POST["mail"]) ? trim($_POST["mail"]) : null;
+					
+					if ($mail != null) {
+						addRequestMail($db, $request_id, $mail);
+					}
+				} catch(PDOException $ex) {
+					echo "An error occurred during the database query!\n";
+					echo $ex;
+				}
+			}
+		}
+	?>
+
 	<div id="primary" class="content-area">
 		<div id="content" class="site-content" role="main">
 
@@ -31,7 +59,13 @@ get_header(); ?>
 
 					<div class="entry-content">
 						
-						Thanks for completing the survey!
+						<div class="survey-complete">
+							Thanks for completing the survey!
+						</div>
+						
+						<div class="survey-back">
+							<a href="/">Back to home</a>
+						</div>
 						
 						<?php wp_link_pages( array( 'before' => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'twentythirteen' ) . '</span>', 'after' => '</div>', 'link_before' => '<span>', 'link_after' => '</span>' ) ); ?>
 					</div><!-- .entry-content -->

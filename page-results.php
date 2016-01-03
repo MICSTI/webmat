@@ -210,8 +210,8 @@ get_header(); ?>
 										// request meta data
 										$request_id = addRequestMetaData($db, $ip);
 										
-										// request details
-										addRequestDetails($db, $request_id, $_POST);
+										// request details-
+										addRequestDetails($db, $request_id, $_POST, $FIELDS_TOOL, $KEY_PROPERTY);
 
 										$query = $db->prepare("SELECT name, kw_single_item, kw_general_indicators, kw_items, abstract, keywords, example_items, original_study_details, secondary_study_details FROM measure_data WHERE " . $where_query);
 										$query->execute();
@@ -233,9 +233,6 @@ get_header(); ?>
 												$no_items = $row["kw_items"];
 												
 												echo "<div class='result'>";
-													// add request id as a hidden field
-													echo "<input type='hidden' id='request-id' value='" . $request_id . "' />";
-												
 													echo "<div class='result-title' onclick=\"toggleDisplay('" . $id . "')\">";
 														echo  "<span id='" . $id . "-plus' class='detail-indicator detail-indicator-plus'>+</span>";
 														echo  "<span id='" . $id . "-minus' class='detail-indicator detail-indicator-minus'>-</span>";
@@ -320,6 +317,11 @@ get_header(); ?>
 						
 						<section class="webmat-survey-container">
 							<form action="/survey" method="post">
+								<?php
+									// add request id as a hidden field
+									echo "<input type='hidden' id='request-id' name='request-id' value='" . $request_id . "' />";
+								?>
+							
 								<div class="survey-paragraph">
 									<div id="survey-content-toggle" class="survey-title" onclick="toggleDisplay('survey-content')">
 										Do you mind telling us something about you and your study?<br/>Please take a moment, click here and fill out the questions below.
@@ -333,8 +335,8 @@ get_header(); ?>
 										</div>
 										
 										<div class="survey-paragraph-question" id="p-helpful">
-											<div><input name="q-helpful" type="radio" value="yes" id="helpful-yes" /><label for="helpful-yes"> Yes, I know now better which measurement I can use.</label></div>
-											<div><input name="q-helpful" type="radio" value="no" id="helpful-no" /><label for="helpful-no"> No, I still don't know which measurement I can use.</label></div>
+											<div><input name="helpful" type="radio" value="yes" id="helpful-yes" /><label for="helpful-yes"> Yes, I know now better which measurement I can use.</label></div>
+											<div><input name="helpful" type="radio" value="no" id="helpful-no" /><label for="helpful-no"> No, I still don't know which measurement I can use.</label></div>
 										</div>
 									</div>
 									
@@ -344,7 +346,7 @@ get_header(); ?>
 										</div>
 										
 										<div class="survey-paragraph-question" id="p-purpose">
-											<input id="q-purpose" name="q-purpose" type="text" class="focus" size="40"/>
+											<input id="q-purpose" name="purpose" type="text" class="focus" size="40"/>
 										</div>
 									</div>
 									
@@ -354,15 +356,15 @@ get_header(); ?>
 										</div>
 										
 										<div class="survey-paragraph-question" id="p-occupation">
-											<div><input name="q-occupation" type="radio" value="student" id="o-student" /><label for="o-student"> Student</label></div>
-											<div><input name="q-occupation" type="radio" value="researcher" id="o-researcher" /><label for="o-researcher"> Researcher (including PhD)</label></div>
-											<div><input name="q-occupation" type="radio" value="professor_academic" id="o-professor" /><label for="o-professor"> Professor/Academic</label></div>
-											<div><input name="q-occupation" type="radio" value="policy_maker" id="o-policy-maker" /><label for="o-policy-maker"> Policy Maker</label></div>
-											<div><input name="q-occupation" type="radio" value="health_professional" id="o-health" /><label for="o-health"> Health Professional</label></div>
-											<div><input name="q-occupation" type="radio" value="volunteer" id="o-volunteer" /><label for="o-volunteer"> Volunteer</label></div>
-											<div><input name="q-occupation" type="radio" value="charity_worker" id="o-charity" /><label for="o-charity"> Charity Worker</label></div>
-											<div><input name="q-occupation" type="radio" value="other" id="o-other" onclick="jQuery('#q-occupation-other').focus();" /><label for="o-other" onclick="jQuery('#q-occupation-other').focus();"> Other</label></div>
-											<div><input id="q-occupation-other" name="q-occupation-other" type="text" size="40"/></div>
+											<div><input name="occupation" type="radio" value="student" id="o-student" /><label for="o-student"> Student</label></div>
+											<div><input name="occupation" type="radio" value="researcher" id="o-researcher" /><label for="o-researcher"> Researcher (including PhD)</label></div>
+											<div><input name="occupation" type="radio" value="professor_academic" id="o-professor" /><label for="o-professor"> Professor/Academic</label></div>
+											<div><input name="occupation" type="radio" value="policy_maker" id="o-policy-maker" /><label for="o-policy-maker"> Policy Maker</label></div>
+											<div><input name="occupation" type="radio" value="health_professional" id="o-health" /><label for="o-health"> Health Professional</label></div>
+											<div><input name="occupation" type="radio" value="volunteer" id="o-volunteer" /><label for="o-volunteer"> Volunteer</label></div>
+											<div><input name="occupation" type="radio" value="charity_worker" id="o-charity" /><label for="o-charity"> Charity Worker</label></div>
+											<div><input name="occupation" type="radio" value="other" id="o-other" onclick="jQuery('#q-occupation-other').focus();" /><label for="o-other" onclick="jQuery('#q-occupation-other').focus();"> Other</label></div>
+											<div><input id="q-occupation-other" name="occupation-other" type="text" size="40"/></div>
 										</div>
 									</div>
 									
@@ -372,7 +374,7 @@ get_header(); ?>
 										</div>
 										
 										<div class="survey-paragraph-question" id="p-country">
-											<select id="q-country" name="q-country">
+											<select id="q-country" name="country">
 												<option value="default">Please select below...</option>
 												<option value="Afganistan">Afghanistan</option>
 												<option value="Albania">Albania</option>
@@ -632,7 +634,7 @@ get_header(); ?>
 										</div>
 										
 										<div class="survey-paragraph-question" id="p-nature">
-											<select id="q-nature" name="q-nature">
+											<select id="q-nature" name="nature">
 												<option value="default">Please select below...</option>
 												<option value="clinical">Clinical setting</option>
 												<option value="industrial_organisational">Industrial-organisational setting</option>
@@ -650,7 +652,7 @@ get_header(); ?>
 										</div>
 										
 										<div class="survey-paragraph-question" id="p-based">
-											<input id="q-based" name="q-based" type="text" class="focus" size="40"/>
+											<input id="q-based" name="based" type="text" class="focus" size="40"/>
 										</div>
 									</div>
 									
@@ -660,8 +662,8 @@ get_header(); ?>
 										</div>
 										
 										<div class="survey-paragraph-question" id="p-funded">
-											<div><input name="q-funded" type="radio" value="yes" id="funded-yes" /><label for="funded-yes"> Yes</label></div>
-											<div><input name="q-funded" type="radio" value="no" id="funded-no" /><label for="funded-no"> No</label></div>
+											<div><input name="funded" type="radio" value="yes" id="funded-yes" /><label for="funded-yes"> Yes</label></div>
+											<div><input name="funded" type="radio" value="no" id="funded-no" /><label for="funded-no"> No</label></div>
 										</div>
 									</div>
 									
@@ -671,8 +673,8 @@ get_header(); ?>
 										</div>
 										
 										<div class="survey-paragraph-question" id="p-reco">
-											<div><input name="q-use" type="radio" value="yes" id="use-yes" /><label for="use-yes"> Yes</label></div>
-											<div><input name="q-use" type="radio" value="no" id="use-no" /><label for="use-no"> No</label></div>
+											<div><input name="use" type="radio" value="yes" id="use-yes" /><label for="use-yes"> Yes</label></div>
+											<div><input name="use" type="radio" value="no" id="use-no" /><label for="use-no"> No</label></div>
 										</div>
 									</div>
 									
@@ -682,7 +684,7 @@ get_header(); ?>
 										</div>
 										
 										<div>
-											<input id="q-email" name="q-email" type="text" size="40"/>
+											<input id="q-mail" name="mail" type="email" size="40"/>
 										</div>
 									</div>	
 									
@@ -692,7 +694,7 @@ get_header(); ?>
 										</div>
 										
 										<div>
-											<input type="submit" class="webmat-button" value="Send" />
+											<input type="submit" class="webmat-button center" value="Send" />
 										</div>
 									</div>
 								</div>
