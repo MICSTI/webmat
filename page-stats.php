@@ -31,9 +31,29 @@ get_header(); ?>
 
 					<div class="entry-content">
 						
-						<h1>Stats</h1>
+						<div class="webmat-title">Stats</div>
 						
-						
+						<div class="stats-container">
+							<div class="stats-nav">
+								<a class="stats-nav-elem stats-nav-elem-active" data-tab="general">General</a>
+								<a class="stats-nav-elem" data-tab="tool">The Tool</a>
+								<a class="stats-nav-elem" data-tab="survey">Survey</a>
+							</div>
+							
+							<div class="stats-content">
+								<div class="stats-tab-content stats-tab-content-active" id="stats-content-general">
+									General
+								</div>
+								
+								<div class="stats-tab-content" id="stats-content-tool">
+									The Tool
+								</div>
+								
+								<div class="stats-tab-content" id="stats-content-survey">
+									Survey
+								</div>
+							</div>
+						</div>
 						
 						<?php wp_link_pages( array( 'before' => '<div class="page-links"><span class="page-links-title">' . __( 'Pages:', 'twentythirteen' ) . '</span>', 'after' => '</div>', 'link_before' => '<span>', 'link_after' => '</span>' ) ); ?>
 					</div><!-- .entry-content -->

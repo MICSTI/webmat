@@ -449,3 +449,59 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 	margin-bottom: 32px;
 }
 /** ----------------------- **/
+
+/** -------- STATS -------- **/
+.stats-nav {
+	border-bottom: 1px solid #ddd;
+}
+
+.stats-nav-elem {
+	display: inline-block;
+	margin: 0px -1px;
+	padding: 8px 12px;
+	position: relative;
+	top: 1px;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+	font-weight: bold;
+	text-decoration: none !important;
+}
+
+.stats-nav-elem:hover {
+	background-color: #bbb;
+	cursor: pointer;
+}
+
+.stats-nav-elem-active {
+	border-top: 1px solid #aaa;
+	border-right: 1px solid #aaa;
+	border-bottom: 1px solid #fff;
+	border-left: 1px solid #aaa;
+}
+
+.no-touch .stats-nav-elem-active:hover {
+	background-color: #fff !important;
+	cursor: default;
+}
+
+.stats-nav-elem:first-child {
+	margin-left: 0px !important;
+}
+
+.stats-nav-elem:last-child {
+	margin-right: 0px !important;
+}
+
+.stats-content {
+	padding: 12px;
+	min-height: 500px;
+}
+
+.stats-tab-content {
+	display: none;
+}
+
+.stats-tab-content-active {
+	display: block !important;
+}
+/** ----------------------- **/

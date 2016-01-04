@@ -121,6 +121,38 @@ jQuery(document).ready(function() {
 		jQuery(this).toggleClass("category-choice-selected");
 	});
 	
+	// stats
+	var statsContent = jQuery(".stats-content");
+	
+	if (statsContent.length > 0) {
+		// init nav elements
+		jQuery(".stats-nav-elem").on("click", function() {
+			// check if it is not already active
+			if (!jQuery(this).hasClass("stats-nav-elem-active")) {
+				// clear active class from other elements
+				jQuery(".stats-nav-elem").removeClass("stats-nav-elem-active");
+				
+				// add it to this one
+				jQuery(this).addClass("stats-nav-elem-active");
+				
+				// get tab
+				var tab = jQuery(this).attr("data-tab");
+				
+				// fade out active tab
+				jQuery(".stats-tab-content-active").fadeOut(200, function() {
+					// remove active class
+					jQuery(this).removeClass("stats-tab-content-active");
+					
+					// fade new tab in
+					jQuery("#stats-content-" + tab).fadeIn(300, function() {
+						// add active class
+						jQuery(this).addClass("stats-tab-content-active");
+					});
+				});
+			}
+		});
+	}
+	
 	// add no-touch class for hover problem on touch devices
 	if (!("ontouchstart" in document.documentElement)) {
 		document.documentElement.className += " no-touch";
