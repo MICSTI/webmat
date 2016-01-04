@@ -122,6 +122,23 @@ jQuery(document).ready(function() {
 	});
 	
 	// stats
+	var loadCharts = function(tab) {
+		switch (tab) {
+			case "general":
+				// OS
+				var osCtx = document.getElementById("chart-os").getContext("2d");
+				window.osChart = new Chart(osCtx).Doughnut(osData, { responsive: true });
+				
+				var browserCtx = document.getElementById("chart-browser").getContext("2d");
+				window.browserChart = new Chart(browserCtx).Doughnut(browserData, { responsive: true });
+				
+				break;
+				
+			default:
+				break;
+		}
+	}
+	
 	var statsContent = jQuery(".stats-content");
 	
 	if (statsContent.length > 0) {
@@ -147,6 +164,9 @@ jQuery(document).ready(function() {
 					jQuery("#stats-content-" + tab).fadeIn(300, function() {
 						// add active class
 						jQuery(this).addClass("stats-tab-content-active");
+						
+						// load charts
+						loadCharts(tab);
 					});
 				});
 			}

@@ -12,6 +12,23 @@
 
 get_header(); ?>
 
+	<?php
+		try {
+			$db = new PDO('mysql:host=' . $DATABASE_HOST . ';dbname=' . $DATABASE_NAME . ';charset=utf8', $DATABASE_USER, $DATABASE_PASSWORD);
+			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+		} catch(PDOException $ex) {
+			echo "An error occurred during the database query!\n";
+			echo $ex;
+		}
+		
+		$requests_number = getNoToolRequests($db);
+		$surveys_number = getNoSurveyFilled($db);
+		
+		$os_data = getOSStats($db);
+		$browser_data = getBrowserStats($db);
+	?>
+
 	<div id="primary" class="content-area">
 		<div id="content" class="site-content" role="main">
 
@@ -42,7 +59,70 @@ get_header(); ?>
 							
 							<div class="stats-content">
 								<div class="stats-tab-content stats-tab-content-active" id="stats-content-general">
-									General
+									<div class="stats-info-elem-wrapper">
+										<span class="stats-info-elem">
+											<span class="stats-info-property"># of <span class="stats-info-highlight">The Tool</span> requests</span>
+											<span class="stats-info-value"><?php echo $requests_number; ?></span>
+										</span>
+									</div>
+									
+									<div class="stats-info-elem-wrapper">
+										<span class="stats-info-elem">
+											<span class="stats-info-property"># of surveys filled out</span>
+											<span class="stats-info-value">
+												<?php
+													$percent = $requests_number > 0 ? " (" . floor($surveys_number / $requests_number * 100) . "%)" : 0;
+													echo $surveys_number . $percent;
+												?>
+											</span>
+										</span>
+									</div>
+									
+									<div class="stats-info-group-wrapper">
+										<span class="stats-info-group">
+											<div class="stats-info-group-title">Operating systems used</div>
+											<div class="stats-info-group-content">
+												<div class="stats-info-group-detail">
+													<?php
+														echo displayChartDetails($os_data, "OperatingSystem", "OSCount");
+													?>
+												</div>
+												
+												<div class="stats-info-group-chart">
+													<canvas id="chart-os" width="200" height="200" />
+												</div>
+											</div>
+										</span>
+										
+										<script type="text/javascript">
+											<?php
+												echo "var osData = " . transformChartData($os_data, "OperatingSystem", "OSCount") . ";";
+											?>
+										</script>
+									</div>
+									
+									<div class="stats-info-group-wrapper">
+										<span class="stats-info-group">
+											<div class="stats-info-group-title">Browsers used</div>
+											<div class="stats-info-group-content">
+												<div class="stats-info-group-detail">
+													<?php
+														echo displayChartDetails($browser_data, "Browser", "BrowserCount");
+													?>
+												</div>
+												
+												<div class="stats-info-group-chart">
+													<canvas id="chart-browser" width="200" height="200" />
+												</div>
+											</div>
+										</span>
+										
+										<script type="text/javascript">
+											<?php
+												echo "var browserData = " . transformChartData($browser_data, "Browser", "BrowserCount") . ";";
+											?>
+										</script>
+									</div>
 								</div>
 								
 								<div class="stats-tab-content" id="stats-content-tool">

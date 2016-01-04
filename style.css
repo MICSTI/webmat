@@ -21,6 +21,10 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 	text-align: center;
 }
 
+.right {
+	text-align: right;
+}
+
 #site-navigation {
 	position: relative;
     top: 20px;
@@ -493,7 +497,7 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 }
 
 .stats-content {
-	padding: 12px;
+	padding: 24px 12px;
 	min-height: 500px;
 }
 
@@ -503,5 +507,53 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 
 .stats-tab-content-active {
 	display: block !important;
+}
+
+.stats-info-highlight {
+	color: #F7CA18;
+}
+
+.stats-info-elem-wrapper, .stats-info-group-wrapper {
+	margin-bottom: 12px;
+}
+
+.stats-info-elem {
+	background-color: #eee;
+	padding: 12px 18px;
+	font-size: large;
+	font-weight: bold;
+	display: inline-block;
+	border-radius: 5px;
+}
+
+.stats-info-property {
+	font-family: 'Helvetica', Arial, sans-serif;
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.stats-info-value {
+	font-family: 'Helvetica', Arial, sans-serif;
+	color: #aaa;
+}
+
+.stats-info-group {
+	background-color: #eee;
+	padding: 12px 18px;
+	border-radius: 5px;
+	display: inline-block;
+}
+
+.stats-info-group-title {
+	font-size: large;
+	font-weight: bold;
+}
+
+.stats-info-group-content {
+	padding: 6px 0px;
+}
+
+.chart-detail td {
+	padding: 5px 5px !important;
 }
 /** ----------------------- **/

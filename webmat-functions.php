@@ -218,3 +218,80 @@
 			}
 		}
 	}
+	
+	function getNoToolRequests($db) {
+		$query = $db->prepare("SELECT COUNT(*) AS 'RequestNo' FROM the_tool_data");
+			
+		$query->execute();
+		
+		$result = $query->fetch(PDO::FETCH_ASSOC);
+		
+		return $result["RequestNo"];
+	}
+	
+	function getNoSurveyFilled($db) {
+		$query = $db->prepare("SELECT COUNT(*) AS 'SurveyNo' FROM (SELECT DISTINCT request_id FROM the_tool_survey) a");
+			
+		$query->execute();
+		
+		$result = $query->fetch(PDO::FETCH_ASSOC);
+		
+		return $result["SurveyNo"];
+	}
+	
+	function getOSStats($db) {
+		$query = $db->prepare( "SELECT
+								  os AS 'OperatingSystem',
+								  COUNT(os) AS 'OSCount'
+								FROM
+								  the_tool_data
+								GROUP BY
+								  os
+								ORDER BY
+								  COUNT(os) DESC");
+			
+		$query->execute();
+		
+		return $query->fetchAll(PDO::FETCH_ASSOC);
+	}
+	
+	function getBrowserStats($db) {
+		$query = $db->prepare( "SELECT
+								  browser_name AS 'Browser',
+								  COUNT(browser_name) AS 'BrowserCount'
+								FROM
+								  the_tool_data
+								GROUP BY
+								  browser_name
+								ORDER BY
+								  COUNT(browser_name) DESC");
+				
+		$query->execute();
+		
+		return $query->fetchAll(PDO::FETCH_ASSOC);
+	}
+	
+	function transformChartData($data, $label, $value) {	
+		$arr = array();
+			
+		foreach ($data as $tupel) {
+			array_push($arr, "{ value: " . $tupel[$value] . ", label: '" . $tupel[$label] . "' }");
+		}
+		
+		return "[" . implode(",", $arr) . "]";
+	}
+	
+	function displayChartDetails($data, $label, $value) {
+		$html = "";
+		
+		$html .= "<table class='chart-detail'>";
+			foreach ($data as $tupel) {
+				$html .= "<tr>";
+					$html .= "<td>" . $tupel[$label] . "</td>";
+					$html .= "<td class='right'>" . $tupel[$value] . "</td>";
+				$html .= "</tr>";
+			}
+		$html .= "</table>";
+		
+		return $html;
+	}
