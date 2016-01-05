@@ -27,6 +27,12 @@ get_header(); ?>
 		
 		$os_data = getOSStats($db);
 		$browser_data = getBrowserStats($db);
+		
+		$os_colors = $COLORS;
+		shuffle($os_colors);
+		
+		$browser_colors = $COLORS;
+		shuffle($browser_colors);
 	?>
 
 	<div id="primary" class="content-area">
@@ -84,7 +90,7 @@ get_header(); ?>
 											<div class="stats-info-group-content">
 												<div class="stats-info-group-detail">
 													<?php
-														echo displayChartDetails($os_data, "OperatingSystem", "OSCount", $COLORS);
+														echo displayChartDetails($os_data, "OperatingSystem", "OSCount", $os_colors);
 													?>
 												</div>
 												
@@ -96,7 +102,7 @@ get_header(); ?>
 										
 										<script type="text/javascript">
 											<?php
-												echo "var osData = " . transformChartData($os_data, "OperatingSystem", "OSCount", $COLORS) . ";";
+												echo "var osData = " . transformChartData($os_data, "OperatingSystem", "OSCount", $os_colors) . ";";
 											?>
 										</script>
 									</div>
@@ -107,7 +113,7 @@ get_header(); ?>
 											<div class="stats-info-group-content">
 												<div class="stats-info-group-detail">
 													<?php
-														echo displayChartDetails($browser_data, "Browser", "BrowserCount", $COLORS);
+														echo displayChartDetails($browser_data, "Browser", "BrowserCount", $browser_colors);
 													?>
 												</div>
 												
@@ -119,7 +125,7 @@ get_header(); ?>
 										
 										<script type="text/javascript">
 											<?php
-												echo "var browserData = " . transformChartData($browser_data, "Browser", "BrowserCount", $COLORS) . ";";
+												echo "var browserData = " . transformChartData($browser_data, "Browser", "BrowserCount", $browser_colors) . ";";
 											?>
 										</script>
 									</div>
