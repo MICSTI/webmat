@@ -52,7 +52,7 @@ get_header(); ?>
 						
 						<div class="stats-container">
 							<div class="stats-nav">
-								<a class="stats-nav-elem stats-nav-elem-active" data-tab="general">General</a>
+								<a class="stats-nav-elem stats-nav-elem-active" data-tab="general" data-default="true">General</a>
 								<a class="stats-nav-elem" data-tab="tool">The Tool</a>
 								<a class="stats-nav-elem" data-tab="survey">Survey</a>
 							</div>
@@ -71,7 +71,7 @@ get_header(); ?>
 											<span class="stats-info-property"># of surveys filled out</span>
 											<span class="stats-info-value">
 												<?php
-													$percent = $requests_number > 0 ? " (" . floor($surveys_number / $requests_number * 100) . "%)" : 0;
+													$percent = $requests_number > 0 ? " (" . round($surveys_number / $requests_number * 100, 0) . "%)" : "";
 													echo $surveys_number . $percent;
 												?>
 											</span>
@@ -89,7 +89,7 @@ get_header(); ?>
 												</div>
 												
 												<div class="stats-info-group-chart">
-													<canvas id="chart-os" width="200" height="200" />
+													<canvas id="chart-os" width="240" height="240" />
 												</div>
 											</div>
 										</span>
@@ -112,7 +112,7 @@ get_header(); ?>
 												</div>
 												
 												<div class="stats-info-group-chart">
-													<canvas id="chart-browser" width="200" height="200" />
+													<canvas id="chart-browser" width="240" height="240" />
 												</div>
 											</div>
 										</span>

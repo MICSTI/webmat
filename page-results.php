@@ -693,8 +693,8 @@ get_header(); ?>
 											Thank you very much for your help!
 										</div>
 										
-										<div>
-											<input type="submit" class="webmat-button center" value="Send" />
+										<div class="survey-submit">
+											<input type="submit" class="webmat-button" value="Send" />
 										</div>
 									</div>
 								</div>

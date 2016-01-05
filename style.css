@@ -25,6 +25,14 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 	text-align: right;
 }
 
+.bold {
+	font-weight: bold;
+}
+
+.grey {
+	color: #929292;
+}
+
 #site-navigation {
 	position: relative;
     top: 20px;
@@ -253,11 +261,20 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 
 .survey-title {
     color: #f7ca18;
-    font-size: 16pt;
+    font-size: 16pt;	
     font-weight: bold;
 	line-height: 20pt;
     padding: 5px;
     text-align: center;
+}
+
+.survey-submit {
+	margin-top: 16px;
+	text-align: center;
+}
+
+.survey-submit input[type=submit] {
+	font-weight: bold !important;
 }
 
 .webmat-survey-container {
@@ -471,7 +488,7 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 	text-decoration: none !important;
 }
 
-.stats-nav-elem:hover {
+.no-touch .stats-nav-elem:hover {
 	background-color: #bbb;
 	cursor: pointer;
 }

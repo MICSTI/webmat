@@ -48,6 +48,15 @@ var showTheTool = function() {
 }
 
 /**
+	Clears all canvases on the screen
+*/
+var clearAllCanvases = function() {
+	jQuery("canvas").each(function(idx, item) {
+		item.width = item.width;
+	});
+}
+
+/**
 	Creates a form dynamically, adds all the checked items from the tool page and submits it then automatically.
 */
 var submitToolForm = function() {
@@ -160,6 +169,9 @@ jQuery(document).ready(function() {
 					// remove active class
 					jQuery(this).removeClass("stats-tab-content-active");
 					
+					// clear canvases
+					clearAllCanvases();
+					
 					// fade new tab in
 					jQuery("#stats-content-" + tab).fadeIn(300, function() {
 						// add active class
@@ -171,6 +183,10 @@ jQuery(document).ready(function() {
 				});
 			}
 		});
+		
+		// auto-load default tab
+		var defaultTab = jQuery("a[data-default=true]").attr("data-tab");
+		loadCharts(defaultTab);
 	}
 	
 	// add no-touch class for hover problem on touch devices

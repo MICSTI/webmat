@@ -202,8 +202,6 @@
 		// iterate over categories
 		foreach ($categories as $category) {
 			$items = $fields[$category];
-			
-			echo $items;
 				
 			foreach ($items as $item) {
 				$property = $item[$key_property];
@@ -284,11 +282,17 @@
 	function displayChartDetails($data, $label, $value) {
 		$html = "";
 		
+		$sum = 0;
+		foreach ($data as $tupel) {
+			$sum += $tupel[$value];
+		}
+		
 		$html .= "<table class='chart-detail'>";
 			foreach ($data as $tupel) {
 				$html .= "<tr>";
-					$html .= "<td>" . $tupel[$label] . "</td>";
+					$html .= "<td class='bold'>" . $tupel[$label] . "</td>";
 					$html .= "<td class='right'>" . $tupel[$value] . "</td>";
+					$html .= "<td class='right grey'>" . round($tupel[$value] / $sum * 100, 0) . "%</td>";
 				$html .= "</tr>";
 			}
 		$html .= "</table>";
