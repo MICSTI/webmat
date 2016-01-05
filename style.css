@@ -273,6 +273,16 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 	text-align: center;
 }
 
+.stat-color-indicator {
+	display: inline-block;
+	margin-right: 8px;
+	width: 14px;
+	height: 14px;
+	border-radius: 7px;
+	position: relative;
+    top: 1px;
+}
+
 .survey-submit input[type=submit] {
 	font-weight: bold !important;
 }

@@ -84,7 +84,7 @@ get_header(); ?>
 											<div class="stats-info-group-content">
 												<div class="stats-info-group-detail">
 													<?php
-														echo displayChartDetails($os_data, "OperatingSystem", "OSCount");
+														echo displayChartDetails($os_data, "OperatingSystem", "OSCount", $COLORS);
 													?>
 												</div>
 												
@@ -96,7 +96,7 @@ get_header(); ?>
 										
 										<script type="text/javascript">
 											<?php
-												echo "var osData = " . transformChartData($os_data, "OperatingSystem", "OSCount") . ";";
+												echo "var osData = " . transformChartData($os_data, "OperatingSystem", "OSCount", $COLORS) . ";";
 											?>
 										</script>
 									</div>
@@ -107,7 +107,7 @@ get_header(); ?>
 											<div class="stats-info-group-content">
 												<div class="stats-info-group-detail">
 													<?php
-														echo displayChartDetails($browser_data, "Browser", "BrowserCount");
+														echo displayChartDetails($browser_data, "Browser", "BrowserCount", $COLORS);
 													?>
 												</div>
 												
@@ -119,7 +119,7 @@ get_header(); ?>
 										
 										<script type="text/javascript">
 											<?php
-												echo "var browserData = " . transformChartData($browser_data, "Browser", "BrowserCount") . ";";
+												echo "var browserData = " . transformChartData($browser_data, "Browser", "BrowserCount", $COLORS) . ";";
 											?>
 										</script>
 									</div>

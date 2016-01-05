@@ -7,6 +7,27 @@
 	$KEY_PROPERTY = "property";
 	$KEY_OPTIONS = "options";
 	
+	// chart default colors
+	$COLORS = array(
+					"rgba(46,204,113,1)",
+					"rgba(248,148,6,1)",
+					"rgba(30,139,195,1)",
+					"rgba(211,84,0,1)",
+					"rgba(0,177,106,1)",
+					"rgba(246,71,71,1)",
+					"rgba(233,212,96,1)",
+					"rgba(108,122,137,1)",
+					"rgba(200,247,197,1)",
+					"rgba(142,68,173,1)",
+					"rgba(38,166,91,1)",
+					"rgba(78,205,196,1)",
+					"rgba(51,110,123,1)",
+					"rgba(134,226,213,1)",
+					"rgba(101,198,187,1)",
+					"rgba(210,77,87,1)",
+					"rgba(218,223,225,1)"
+					);
+	
 	$FIELDS_TOOL = array( "Age" => array( array($KEY_PROPERTY => "children", $KEY_DISPLAY => "Children"),
 									 array($KEY_PROPERTY => "adolescents", $KEY_DISPLAY => "Adolescents"),
 									 array($KEY_PROPERTY => "adults", $KEY_DISPLAY => "Adults"),
@@ -269,17 +290,25 @@
 		return $query->fetchAll(PDO::FETCH_ASSOC);
 	}
 	
-	function transformChartData($data, $label, $value) {	
+	function transformChartData($data, $label, $value, $colors = array()) {		
 		$arr = array();
+		
+		$idx = 0;
 			
 		foreach ($data as $tupel) {
-			array_push($arr, "{ value: " . $tupel[$value] . ", label: '" . $tupel[$label] . "' }");
+			array_push($arr, "{ value: " . $tupel[$value] . ", label: '" . $tupel[$label] . "', color: '" . $colors[$idx] . "' }");
+			
+			$idx++;
+			
+			if ($idx > count($colors)) {
+				$idx = 0;
+			}
 		}
 		
 		return "[" . implode(",", $arr) . "]";
 	}
 	
-	function displayChartDetails($data, $label, $value) {
+	function displayChartDetails($data, $label, $value, $colors = array()) {
 		$html = "";
 		
 		$sum = 0;
@@ -287,13 +316,23 @@
 			$sum += $tupel[$value];
 		}
 		
+		$idx = 0;
+		
 		$html .= "<table class='chart-detail'>";
 			foreach ($data as $tupel) {
+				$color_span = "<span class='stat-color-indicator' style='background-color: " . $colors[$idx] . ";'></span>";
+				
 				$html .= "<tr>";
-					$html .= "<td class='bold'>" . $tupel[$label] . "</td>";
+					$html .= "<td class='bold'>" . $color_span . $tupel[$label] . "</td>";
 					$html .= "<td class='right'>" . $tupel[$value] . "</td>";
 					$html .= "<td class='right grey'>" . round($tupel[$value] / $sum * 100, 0) . "%</td>";
 				$html .= "</tr>";
+				
+				$idx++;
+			
+				if ($idx > count($colors)) {
+					$idx = 0;
+				}
 			}
 		$html .= "</table>";
 		
