@@ -132,7 +132,38 @@ get_header(); ?>
 								</div>
 								
 								<div class="stats-tab-content" id="stats-content-tool">
-									The Tool
+									<?php
+										// iterate over tool fields
+										$categories = array_keys($FIELDS_TOOL);
+										
+										foreach ($categories as $category) {
+											$elements = $FIELDS_TOOL[$category];
+											
+											echo "<div class='stats-info-group-wrapper'>";
+												echo "<span class='stats-info-group'>";
+													// group title
+													echo "<div class='stats-info-group-title'>" . $category . "</div>";
+												
+													// group content
+													echo "<div class='stats-info-group-content'>";
+														foreach ($elements as $element) {
+															$property_sum = getPropertySum($db, $element[$KEY_PROPERTY]);
+															
+															$percent = round($property_sum / $requests_number * 100, 0);
+															
+															echo "<div class='stats-info-key-bar'>";
+																echo "<span class='stats-info-key-fixed-200'>" . $element[$KEY_DISPLAY] . "</span>";
+																echo "<span class='stats-info-key-progress'>";
+																	echo "<span class='stats-info-key-progress-value'>" . $percent . "%</span>";
+																	echo "<span class='stats-info-key-progress-filled' data-value='" . $percent . "' style='width: " . $percent . "%;'></span>";
+																echo "</span>";
+															echo "</div>";
+														}
+													echo "</div>";
+												echo "</span>";
+											echo "</div>";
+										}
+									?>
 								</div>
 								
 								<div class="stats-tab-content" id="stats-content-survey">

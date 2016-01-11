@@ -338,3 +338,13 @@
 		
 		return $html;
 	}
+	
+	function getPropertySum($db, $property) {
+		$query = $db->prepare("SELECT SUM(value) AS 'PropertySum' FROM the_tool_details WHERE prop = :property GROUP BY prop");
+			
+		$query->execute( array(":property" => $property) );
+		
+		$result = $query->fetch(PDO::FETCH_ASSOC);
+		
+		return $result["PropertySum"];
+	}
