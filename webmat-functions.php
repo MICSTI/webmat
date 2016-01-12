@@ -5,7 +5,8 @@
 	// The tool constants
 	$KEY_DISPLAY = "display";
 	$KEY_PROPERTY = "property";
-	$KEY_OPTIONS = "options";
+	$KEY_TRANSLATION = "translation";
+	$KEY_TYPE = "type";
 	
 	// chart default colors
 	$COLORS = array(
@@ -54,15 +55,15 @@
 									array($KEY_PROPERTY => "items-30-+", $KEY_DISPLAY => "30+ items") )
 					);
 					
-	$FIELDS_SURVEY = array( "Questions" => array( array($KEY_PROPERTY => "helpful", $KEY_DISPLAY => "Have the suggestions been helpful for choosing a measurement?", $KEY_OPTIONS => array("yes" => "Yes", "no" => "No")),
+	$FIELDS_SURVEY = array( "Questions" => array( array($KEY_PROPERTY => "helpful", $KEY_DISPLAY => "Have the suggestions been helpful for choosing a measurement?", $KEY_TYPE => "doughnut", $KEY_TRANSLATION => array("yes" => "Yes", "no" => "No")),
 												array($KEY_PROPERTY => "purpose", $KEY_DISPLAY => "What is the purpose of your study?"),
-												array($KEY_PROPERTY => "occupation", $KEY_DISPLAY => "Are you a..."),
+												array($KEY_PROPERTY => "occupation", $KEY_DISPLAY => "Are you a...", $KEY_TYPE => "doughnut"),
 												array($KEY_PROPERTY => "occupation-other", $KEY_DISPLAY => "Other occupation entries"),
 												array($KEY_PROPERTY => "country", $KEY_DISPLAY => "In which country are you working?"),
 												array($KEY_PROPERTY => "nature", $KEY_DISPLAY => "What is the nature of work you are doing?"),
 												array($KEY_PROPERTY => "based", $KEY_DISPLAY => "Where are you currently based?"),
-												array($KEY_PROPERTY => "funded", $KEY_DISPLAY => "Is your work funded?"),
-												array($KEY_PROPERTY => "use", $KEY_DISPLAY => "Are you going to use the recommendations from the tool?")
+												array($KEY_PROPERTY => "funded", $KEY_DISPLAY => "Is your work funded?", $KEY_TYPE => "doughnut", $KEY_TRANSLATION => array("yes" => "Yes", "no" => "No")),
+												array($KEY_PROPERTY => "use", $KEY_DISPLAY => "Are you going to use the recommendations from the tool?", $KEY_TYPE => "doughnut", $KEY_TRANSLATION => array("yes" => "Yes", "no" => "No"))
 											)
 					);
 
@@ -258,6 +259,24 @@
 		return $result["SurveyNo"];
 	}
 	
+	function getSurveyStats($db, $property) {
+		$query = $db->prepare( "SELECT
+								  value AS 'ValueName',
+								  COUNT(value) AS 'ValueCount'
+								FROM
+								  the_tool_survey
+								WHERE
+								  prop = :property
+								GROUP BY
+								  value
+								ORDER BY
+								  'ValueCount' DESC");
+			
+		$query->execute( array(":property" => $property) );
+		
+		return $query->fetchAll(PDO::FETCH_ASSOC);
+	}
+	
 	function getOSStats($db) {
 		$query = $db->prepare( "SELECT
 								  os AS 'OperatingSystem',
@@ -290,13 +309,23 @@
 		return $query->fetchAll(PDO::FETCH_ASSOC);
 	}
 	
-	function transformChartData($data, $label, $value, $colors = array()) {		
+	function transformChartData($data, $label, $value, $colors = array(), $translation = array()) {		
+		if (!is_array($translation)) {
+			$translation = array();
+		}
+	
 		$arr = array();
 		
 		$idx = 0;
 			
 		foreach ($data as $tupel) {
-			array_push($arr, "{ value: " . $tupel[$value] . ", label: '" . $tupel[$label] . "', color: '" . $colors[$idx] . "' }");
+			if (array_key_exists($tupel[$label], $translation)) {
+				$display = $translation[$tupel[$label]];
+			} else {
+				$display = $tupel[$label];
+			}
+			
+			array_push($arr, "{ value: " . $tupel[$value] . ", label: '" . $display . "', color: '" . $colors[$idx] . "' }");
 			
 			$idx++;
 			
@@ -308,7 +337,7 @@
 		return "[" . implode(",", $arr) . "]";
 	}
 	
-	function displayChartDetails($data, $label, $value, $colors = array()) {
+	function displayChartDetails($data, $label, $value, $colors = array(), $translation = array()) {
 		$html = "";
 		
 		$sum = 0;
@@ -322,8 +351,14 @@
 			foreach ($data as $tupel) {
 				$color_span = "<span class='stat-color-indicator' style='background-color: " . $colors[$idx] . ";'></span>";
 				
+				if (array_key_exists($tupel[$label], $translation)) {
+					$display = $translation[$tupel[$label]];
+				} else {
+					$display = $tupel[$label];
+				}
+				
 				$html .= "<tr>";
-					$html .= "<td class='bold'>" . $color_span . $tupel[$label] . "</td>";
+					$html .= "<td class='bold'>" . $color_span . $display . "</td>";
 					$html .= "<td class='right'>" . $tupel[$value] . "</td>";
 					$html .= "<td class='right grey'>" . round($tupel[$value] / $sum * 100, 0) . "%</td>";
 				$html .= "</tr>";

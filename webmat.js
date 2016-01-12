@@ -57,6 +57,62 @@ var clearAllCanvases = function() {
 }
 
 /**
+	Clears all progress bars on the screen
+*/
+var clearAllProgressBars = function() {
+	// hide progress bar values
+	jQuery(".stats-info-key-progress-value").css("opacity", 0);
+	
+	// reset widths
+	jQuery(".stats-info-key-progress-filled").css("width", "");
+	
+	// remove hover function
+	jQuery(".stats-info-key-progress-value").off("hover");
+}
+
+/**
+	Animates the progress bars
+*/
+var animateProgressBars = function() {
+	var bars = jQuery(".stats-info-key-progress-filled");
+	
+	bars.each(function(idx, elem) {
+		var callback = idx == (bars.length - 1) ? function() {
+			var values = jQuery(".stats-info-key-progress-value");
+			
+			values.each(function(idx2, elem2) {
+				var anotherCallback = idx2 == (values.length - 1) ? function() {
+					addProgressBarHover();
+				} : function() {};
+				
+				jQuery(elem2).animate( {opacity: 1}, {
+					duration: 250,
+					complete: anotherCallback
+				} );
+			});
+		} : function() {};
+		
+		jQuery(elem).animate({
+			width: jQuery(elem).attr("data-value") + "%",
+		}, {
+			duration: 750,
+			complete: callback
+		});
+	});
+}
+
+/**
+	Adds a hover function to all progress bars
+*/
+var addProgressBarHover = function() {
+	jQuery(".stats-info-key-progress-value").hover(function() {
+		jQuery(this).html(jQuery(this).attr("data-real"));
+	}, function() {
+		jQuery(this).html(jQuery(this).attr("data-value") + "%");
+	});
+}
+
+/**
 	Creates a form dynamically, adds all the checked items from the tool page and submits it then automatically.
 */
 var submitToolForm = function() {
@@ -143,6 +199,19 @@ jQuery(document).ready(function() {
 				
 				break;
 				
+			case "survey":
+				var charts = ["helpful", "funded", "use"];
+				
+				charts.forEach(function(item, idx) {
+					var data = window["stats_" + item];
+					
+					if (data !== undefined) {
+						new Chart(document.getElementById("chart-" + item).getContext("2d")).Doughnut(data, { responsive: true });
+					}
+				});
+			
+				break;
+				
 			default:
 				break;
 		}
@@ -172,6 +241,9 @@ jQuery(document).ready(function() {
 					// clear canvases
 					clearAllCanvases();
 					
+					// clear progress bars
+					clearAllProgressBars();
+					
 					// fade new tab in
 					jQuery("#stats-content-" + tab).fadeIn(300, function() {
 						// add active class
@@ -179,6 +251,9 @@ jQuery(document).ready(function() {
 						
 						// load charts
 						loadCharts(tab);
+						
+						// animate progress bars
+						animateProgressBars();
 					});
 				});
 			}

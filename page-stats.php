@@ -154,8 +154,8 @@ get_header(); ?>
 															echo "<div class='stats-info-key-bar'>";
 																echo "<span class='stats-info-key-fixed-200'>" . $element[$KEY_DISPLAY] . "</span>";
 																echo "<span class='stats-info-key-progress'>";
-																	echo "<span class='stats-info-key-progress-value'>" . $percent . "%</span>";
-																	echo "<span class='stats-info-key-progress-filled' data-value='" . $percent . "' style='width: " . $percent . "%;'></span>";
+																	echo "<span class='stats-info-key-progress-value' data-value='" . $percent . "' data-real='" . $property_sum . " out of " . $requests_number . "'>" . $percent . "%</span>";
+																	echo "<span class='stats-info-key-progress-filled' data-value='" . $percent . "' ></span>";
 																echo "</span>";
 															echo "</div>";
 														}
@@ -167,7 +167,54 @@ get_header(); ?>
 								</div>
 								
 								<div class="stats-tab-content" id="stats-content-survey">
-									Survey
+									<?php
+										// iterate over survey fields
+										$questions = $FIELDS_SURVEY["Questions"];
+										
+										foreach ($questions as $question) {
+											echo "<div class='stats-info-group-wrapper'>";
+												echo "<span class='stats-info-group stats-info-fixed-260'>";
+													// group title
+													echo "<div class='stats-info-group-title'>" . $question[$KEY_DISPLAY] . "</div>";
+													
+													// group content
+													echo "<div class='stats-info-group-content'>";
+														switch($question[$KEY_TYPE]) {
+															case "doughnut":
+																$stats_data = getSurveyStats($db, $question[$KEY_PROPERTY]);
+																$stats_colors = $COLORS;
+																shuffle($stats_colors);
+																
+																$var_name = "stats_" . $question[$KEY_PROPERTY];
+																
+																$translation = array_key_exists($KEY_TRANSLATION, $question) ? $question[$KEY_TRANSLATION] : array();
+																
+																echo "<div class='stats-info-group-detail'>";
+																	echo displayChartDetails($stats_data, "ValueName", "ValueCount", $stats_colors, $translation);
+																echo "</div>";
+																
+																echo "<div class='stats-info-group-chart'>";
+																	echo "<canvas id='chart-" . $question[$KEY_PROPERTY] . "' width='150' height='150' />";
+																echo "</div>";
+																
+																echo "<script type='text/javascript'>";
+																	echo "var " . $var_name . " = " . transformChartData($stats_data, "ValueName", "ValueCount", $stats_colors, $question[$KEY_TRANSLATION]) . ";";
+																echo "</script>";
+																
+																break;
+																
+															case "bar":
+															
+																break;
+																
+															default:
+																break;
+														}
+													echo "</div>";
+												echo "</span>";
+											echo "</div>";
+										}
+									?>
 								</div>
 							</div>
 						</div>

@@ -587,6 +587,10 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 	padding: 5px 5px !important;
 }
 
+.stats-info-fixed-260 {
+	width: 260px !important;
+}
+
 .stats-info-key-bar {
 	margin-bottom: 4px;
 }
