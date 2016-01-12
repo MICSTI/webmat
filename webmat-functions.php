@@ -56,12 +56,32 @@
 					);
 					
 	$FIELDS_SURVEY = array( "Questions" => array( array($KEY_PROPERTY => "helpful", $KEY_DISPLAY => "Have the suggestions been helpful for choosing a measurement?", $KEY_TYPE => "doughnut", $KEY_TRANSLATION => array("yes" => "Yes", "no" => "No")),
-												array($KEY_PROPERTY => "purpose", $KEY_DISPLAY => "What is the purpose of your study?"),
-												array($KEY_PROPERTY => "occupation", $KEY_DISPLAY => "Are you a...", $KEY_TYPE => "doughnut"),
-												array($KEY_PROPERTY => "occupation-other", $KEY_DISPLAY => "Other occupation entries"),
-												array($KEY_PROPERTY => "country", $KEY_DISPLAY => "In which country are you working?"),
-												array($KEY_PROPERTY => "nature", $KEY_DISPLAY => "What is the nature of work you are doing?"),
-												array($KEY_PROPERTY => "based", $KEY_DISPLAY => "Where are you currently based?"),
+												array($KEY_PROPERTY => "purpose", $KEY_DISPLAY => "What is the purpose of your study?", $KEY_TYPE => "list-plain"),
+												array($KEY_PROPERTY => "occupation", $KEY_DISPLAY => "Are you a...", $KEY_TYPE => "bar-horizontal", $KEY_TRANSLATION => array(
+													"student" => "Student",
+													"researcher" => "Researcher",
+													"professor_academic" => "Professor/Academic",
+													"policy_maker" => "Policy maker",
+													"health_professional" => "Health professional",
+													"volunteer" => "Volunteer",
+													"charity_worker" => "Charity worker",
+													"other" => "Other",
+													"default" => "None selected"
+												)),
+												array($KEY_PROPERTY => "occupation-other", $KEY_DISPLAY => "Other occupation entries", $KEY_TYPE => "list-plain"),
+												array($KEY_PROPERTY => "country", $KEY_DISPLAY => "In which country are you working?", $KEY_TYPE => "bar-horizontal", $KEY_TRANSLATION => array(
+													"default" => "None selected"
+												)),
+												array($KEY_PROPERTY => "nature", $KEY_DISPLAY => "What is the nature of work you are doing?", $KEY_TYPE => "bar-horizontal", $KEY_TRANSLATION => array(
+													"clinical" => "Clinical setting",
+													"industrial_organisational" => "Industrial-organisational setting",
+													"health" => "Health setting",
+													"school" => "School setting",
+													"political" => "Political setting",
+													"other" => "Other",
+													"default" => "None selected"
+												)),
+												array($KEY_PROPERTY => "based", $KEY_DISPLAY => "Where are you currently based?", $KEY_TYPE => "list-plain"),
 												array($KEY_PROPERTY => "funded", $KEY_DISPLAY => "Is your work funded?", $KEY_TYPE => "doughnut", $KEY_TRANSLATION => array("yes" => "Yes", "no" => "No")),
 												array($KEY_PROPERTY => "use", $KEY_DISPLAY => "Are you going to use the recommendations from the tool?", $KEY_TYPE => "doughnut", $KEY_TRANSLATION => array("yes" => "Yes", "no" => "No"))
 											)
@@ -277,6 +297,24 @@
 		return $query->fetchAll(PDO::FETCH_ASSOC);
 	}
 	
+	function getSurveyStatsPlainList($db, $property) {
+		$query = $db->prepare( "SELECT
+								  value AS 'ListItemText',
+								  COUNT(value) AS 'ListItemCount'
+								FROM
+								  the_tool_survey
+								WHERE
+								  prop = :property
+								GROUP BY
+								  value
+								ORDER BY
+								  'ListItemCount' DESC");
+			
+		$query->execute( array(":property" => $property) );
+		
+		return $query->fetchAll(PDO::FETCH_ASSOC);
+	}
+	
 	function getOSStats($db) {
 		$query = $db->prepare( "SELECT
 								  os AS 'OperatingSystem',
@@ -368,6 +406,21 @@
 				if ($idx > count($colors)) {
 					$idx = 0;
 				}
+			}
+		$html .= "</table>";
+		
+		return $html;
+	}
+	
+	function displayPlainList($data) {
+		$html = "";
+		
+		$html .= "<table class='chart-detail'>";
+			foreach($data as $tupel) {
+				$html .= "<tr>";
+					$html .= "<td class='bold'>" . $tupel["ListItemText"] . "</td>";
+					$html .= "<td class='right'>" . $tupel["ListItemCount"] . "</td>";
+				$html .= "</tr>";
 			}
 		$html .= "</table>";
 		

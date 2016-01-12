@@ -173,7 +173,9 @@ get_header(); ?>
 										
 										foreach ($questions as $question) {
 											echo "<div class='stats-info-group-wrapper'>";
-												echo "<span class='stats-info-group stats-info-fixed-260'>";
+												$width = $question[$KEY_TYPE] == "doughnut" ? "width: 260px !important;" : "";
+											
+												echo "<span class='stats-info-group' style='" . $width . "'>";
 													// group title
 													echo "<div class='stats-info-group-title'>" . $question[$KEY_DISPLAY] . "</div>";
 													
@@ -185,26 +187,71 @@ get_header(); ?>
 																$stats_colors = $COLORS;
 																shuffle($stats_colors);
 																
-																$var_name = "stats_" . $question[$KEY_PROPERTY];
-																
-																$translation = array_key_exists($KEY_TRANSLATION, $question) ? $question[$KEY_TRANSLATION] : array();
-																
-																echo "<div class='stats-info-group-detail'>";
-																	echo displayChartDetails($stats_data, "ValueName", "ValueCount", $stats_colors, $translation);
-																echo "</div>";
-																
-																echo "<div class='stats-info-group-chart'>";
-																	echo "<canvas id='chart-" . $question[$KEY_PROPERTY] . "' width='150' height='150' />";
-																echo "</div>";
-																
-																echo "<script type='text/javascript'>";
-																	echo "var " . $var_name . " = " . transformChartData($stats_data, "ValueName", "ValueCount", $stats_colors, $question[$KEY_TRANSLATION]) . ";";
-																echo "</script>";
+																if (count($stats_data) > 0) {
+																	$var_name = "stats_" . $question[$KEY_PROPERTY];
+																	
+																	$translation = array_key_exists($KEY_TRANSLATION, $question) ? $question[$KEY_TRANSLATION] : array();
+																	
+																	echo "<div class='stats-info-group-detail'>";
+																		echo displayChartDetails($stats_data, "ValueName", "ValueCount", $stats_colors, $translation);
+																	echo "</div>";
+																	
+																	echo "<div class='stats-info-group-chart'>";
+																		echo "<canvas id='chart-" . $question[$KEY_PROPERTY] . "' width='150' height='150' />";
+																	echo "</div>";
+																	
+																	echo "<script type='text/javascript'>";
+																		echo "var " . $var_name . " = " . transformChartData($stats_data, "ValueName", "ValueCount", $stats_colors, $question[$KEY_TRANSLATION]) . ";";
+																	echo "</script>";
+																} else {
+																	echo "Unfortunately, no data to show yet.";
+																}
 																
 																break;
 																
-															case "bar":
-															
+															case "bar-horizontal":
+																$stats_data = getSurveyStats($db, $question[$KEY_PROPERTY]);
+																
+																if (count($stats_data > 0)) {
+																	$count = 0;
+																	foreach($stats_data as $tupel) {
+																		$count += $tupel["ValueCount"];
+																	}
+																	
+																	foreach($stats_data as $tupel) {
+																		$percent = round($tupel["ValueCount"] / $count * 100, 0);
+																		
+																		$translation = array_key_exists($KEY_TRANSLATION, $question) ? $question[$KEY_TRANSLATION] : array();
+																		
+																		if (array_key_exists($tupel["ValueName"], $translation)) {
+																			$display = $translation[$tupel["ValueName"]];
+																		} else {
+																			$display = $tupel["ValueName"];
+																		}
+																		
+																		echo "<div class='stats-info-key-bar'>";
+																			echo "<span class='stats-info-key-fixed-200'>" . $display . "</span>";
+																			echo "<span class='stats-info-key-progress'>";
+																				echo "<span class='stats-info-key-progress-value' data-value='" . $percent . "' data-real='" . $tupel["ValueCount"] . " out of " . $count . "'>" . $percent . "%</span>";
+																				echo "<span class='stats-info-key-progress-filled' data-value='" . $percent . "' ></span>";
+																			echo "</span>";
+																		echo "</div>";
+																	}
+																} else {
+																	echo "Unfortunately, no data to show yet.";
+																}
+																
+																break;
+																
+															case "list-plain":
+																$stats_data = getSurveyStatsPlainList($db, $question[$KEY_PROPERTY]);
+																
+																if (count($stats_data > 0)) {
+																	echo displayPlainList($stats_data);
+																} else {
+																	echo "Unfortunately, no data to show yet.";
+																}
+																
 																break;
 																
 															default:
