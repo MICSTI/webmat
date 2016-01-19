@@ -8,6 +8,9 @@
 	$KEY_TRANSLATION = "translation";
 	$KEY_TYPE = "type";
 	
+	// paging size
+	$PAGING_SIZE = 25;
+	
 	// chart default colors
 	$COLORS = array(
 					"rgba(46,204,113,1)",
@@ -451,6 +454,8 @@
 									d.survey AS 'SurveyFilledIn'
 								FROM
 									the_tool_data d
+								ORDER BY
+									d.timestamp DESC
 								LIMIT " . $limit);
 			
 		$query->execute();
@@ -462,4 +467,46 @@
 		$query = $db->prepare("UPDATE the_tool_data SET survey = 1 WHERE id = :request_id");
 			
 		$query->execute( array(":request_id" => $request_id) );
+	}
+	
+	function getRequestDetailsContent($db, $page, $size) {
+		$html = "";
+		
+		$top = ($page - 1) * $size;
+		$bottom = $page * $size;
+		
+		$requests = getPagedRequests($db, $top, $bottom);
+		
+		foreach ($requests as $request) {
+			$html .= "<div class='stats-info-group-wrapper'>";
+				$html .= "<div class='stats-info-group whole-row'>";
+					// request timestamp
+					$html .= "<span>" . convertDatetime($request["RequestTimestamp"]) . "</span>";
+					
+					// container for country and survey spans
+					$html .= "<span class='float-right'>";
+						// survey span
+						if ($request["SurveyFilledIn"] == 1) {
+							$html .= "<span class='survey-indicator'>Survey</span>";
+						}
+						
+						// country span
+						$html .= "<span class='country-indicator' data-ip='" . $request["IpAddress"] . "'></span>";
+					$html .= "</span>";
+				$html .= "</div>";
+			$html .= "</div>";
+		}
+		
+		return $html;
+	}
+	
+	function convertDatetime($datetime) {
+		$parts = explode(" ", $datetime);
+		
+		$date = $parts[0];
+		$time = $parts[1];
+		
+		$dateParts = explode("-", $date);
+		
+		return $dateParts[2] . "." . $dateParts[1] . "." . $dateParts[0] . " " . $time;
 	}

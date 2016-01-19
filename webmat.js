@@ -102,6 +102,61 @@ var animateProgressBars = function() {
 }
 
 /**
+	Loads all country indicators and fades them in upon fetch completion
+*/
+var loadCountryIndicators = function() {
+	// build JSON array
+	var query = [];
+	var fields = "country,countryCode,regionName,city,lat,lon,isp,org,mobile,query";
+	
+	jQuery(".country-indicator").each(function(idx, item) {
+		var ip = jQuery(item).attr("data-ip");
+		
+		if (ip !== undefined) {
+			query.push({
+				query: ip,
+				fields: fields
+			});
+		}
+	});
+	
+	jQuery.ajax({
+		url: "http://ip-api.com/batch",
+		data: JSON.stringify(query),
+		method: "POST"
+	}).done(function(data) {
+		// parse response array
+		data.forEach(function(item) {
+			jQuery(".country-indicator[data-ip='" + item.query + "']")
+						.text(item.country)
+						.attr({
+							"data-country": item.country,
+							"data-country-code": item.countryCode,
+							"data-region-name": item.regionName,
+							"data-city": item.city,
+							"data-lat": item.lat,
+							"data-lon": item.lon,
+							"data-isp": item.isp,
+							"data-org": item.org,
+							"data-mobile": item.mobile
+						});
+		});
+		
+		// fade country indicators in
+		jQuery(".country-indicator").fadeIn(250);
+	}).fail(function(err) {
+		console.log("Error fetching IP info", err);
+	});
+};
+
+/**
+	Hides all country indicators
+*/
+var hideCountryIndicators = function() {
+	jQuery(".country-indicator").hide();
+};
+
+/**
 	Adds a hover function to all progress bars
 */
 var addProgressBarHover = function() {
@@ -244,6 +299,9 @@ jQuery(document).ready(function() {
 					// clear progress bars
 					clearAllProgressBars();
 					
+					// hide country indicators
+					hideCountryIndicators();
+					
 					// fade new tab in
 					jQuery("#stats-content-" + tab).fadeIn(300, function() {
 						// add active class
@@ -254,6 +312,9 @@ jQuery(document).ready(function() {
 						
 						// animate progress bars
 						animateProgressBars();
+						
+						// load country indicators
+						loadCountryIndicators();
 					});
 				});
 			}
