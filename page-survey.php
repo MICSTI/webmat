@@ -26,6 +26,9 @@ get_header(); ?>
 					// add survey details to db
 					addSurveyDetails($db, $request_id, $_POST, $FIELDS_SURVEY, $KEY_PROPERTY);
 					
+					// set survey flag in the_tool_data
+					setSurveyFlag($db, $request_id, 1);
+					
 					// add mail address also if it was set
 					$mail = isset($_POST["mail"]) ? trim($_POST["mail"]) : null;
 					

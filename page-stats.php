@@ -61,6 +61,7 @@ get_header(); ?>
 								<a class="stats-nav-elem stats-nav-elem-active" data-tab="general" data-default="true">General</a>
 								<a class="stats-nav-elem" data-tab="tool">The Tool</a>
 								<a class="stats-nav-elem" data-tab="survey">Survey</a>
+								<a class="stats-nav-elem" data-tab="details">Details</a>
 							</div>
 							
 							<div class="stats-content">
@@ -262,6 +263,10 @@ get_header(); ?>
 											echo "</div>";
 										}
 									?>
+								</div>
+								
+								<div class="stats-tab-content" id="stats-content-details">
+									Details
 								</div>
 							</div>
 						</div>

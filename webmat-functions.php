@@ -270,7 +270,7 @@
 	}
 	
 	function getNoSurveyFilled($db) {
-		$query = $db->prepare("SELECT COUNT(*) AS 'SurveyNo' FROM (SELECT DISTINCT request_id FROM the_tool_survey) a");
+		$query = $db->prepare("SELECT COUNT(id) AS 'SurveyNo' FROM the_tool_data WHERE survey = 1");
 			
 		$query->execute();
 		
@@ -435,4 +435,31 @@
 		$result = $query->fetch(PDO::FETCH_ASSOC);
 		
 		return $result["PropertySum"];
+	}
+	
+	function getPagedRequests($db, $top, $bottom) {
+		$limit = $top . ", " . $bottom;
+		
+		$query = $db->prepare("SELECT
+									d.id AS 'RequestId',
+									d.timestamp AS 'RequestTimestamp',
+									d.ip AS 'IpAddress',
+									d.os AS 'OperatingSystem',
+									d.browser_name AS 'BrowserName',
+									d.browser_version AS 'BrowserVersion',
+									d.mail AS 'SurveyContact',
+									d.survey AS 'SurveyFilledIn'
+								FROM
+									the_tool_data d
+								LIMIT " . $limit);
+			
+		$query->execute();
+		
+		return $query->fetchAll(PDO::FETCH_ASSOC);
+	}
+	
+	function setSurveyFlag($db, $request_id) {
+		$query = $db->prepare("UPDATE the_tool_data SET survey = 1 WHERE id = :request_id");
+			
+		$query->execute( array(":request_id" => $request_id) );
 	}
