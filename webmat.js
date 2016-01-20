@@ -102,6 +102,39 @@ var animateProgressBars = function() {
 }
 
 /**
+	Inits the paging on a page
+*/
+var initPaging = function() {
+	if (jQuery(".paging").length > 0) {
+		jQuery(".paging-direction-indicator").on("click", function() {
+			var direction = jQuery(this).attr("data-direction");
+			
+			if (direction == "back") {
+				// back
+				var _page = parseInt(jQuery("#paging-current").text()) - 1;
+				
+				if (_page == 1) {
+					jQuery(this).css("visibility", "hidden");
+				}
+				
+				jQuery(".paging-direction-indicator[data-direction=forward]").css("visibility", "visible");
+			} else {
+				// forward
+				var _page = parseInt(jQuery("#paging-current").text()) + 1;
+				
+				if (_page == parseInt(jQuery("#paging-max").text())) {
+					jQuery(this).css("visibility", "hidden");
+				}
+				
+				jQuery(".paging-direction-indicator[data-direction=back]").css("visibility", "visible");
+			}
+			
+			jQuery("#paging-current").text(_page);
+		});
+	}
+}
+
+/**
 	Loads all country indicators and fades them in upon fetch completion
 */
 var loadCountryIndicators = function() {
@@ -315,6 +348,9 @@ jQuery(document).ready(function() {
 						
 						// load country indicators
 						loadCountryIndicators();
+						
+						// add paging
+						initPaging();
 					});
 				});
 			}

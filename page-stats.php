@@ -268,7 +268,10 @@ get_header(); ?>
 								<div class="stats-tab-content" id="stats-content-details">
 									<?php
 										$page = 1;
+										
 										echo getRequestDetailsContent($db, $page, $PAGING_SIZE);
+										
+										echo getPaging($page, $PAGING_SIZE, $requests_number);
 									?>
 								</div>
 							</div>

@@ -500,6 +500,29 @@
 		return $html;
 	}
 	
+	function getPaging($page, $size, $total) {
+		$html = "";
+		
+		$pages_no = ceil($total / $size);
+		
+		$html .= "<div class='paging'>";
+			// back indicator
+			$display_back = $page == 1 ? "style='visibility: hidden;'" : "";
+			
+			$html .= "<span class='paging-direction-indicator' data-direction='back' " . $display_back . ">&lt;</span>";
+			
+			// page x of y
+			$html .= "<span class='paging-location-indicator'><span id='paging-current'>" . $page . "</span> of <span id='paging-max'>" . $pages_no . "</span></span>";
+			
+			// forward indicator
+			$display_forward = $page == $pages_no ? "style='visibility: hidden;'" : "";
+			
+			$html .= "<span class='paging-direction-indicator' data-direction='forward' " . $display_forward . ">&gt;</span>";
+		$html .= "</div>";
+		
+		return $html;
+	}
+	
 	function convertDatetime($datetime) {
 		$parts = explode(" ", $datetime);
 		

@@ -18,7 +18,7 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 
 /* ------ WEBMAT CSS ------ */
 .whole-row {
-	width: 100%;
+	width: 95%;
 }
 
 .center {
@@ -662,5 +662,49 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 	font-weight: bold;
 	border-radius: 5px;
 	margin-left: 12px;
+}
+/** ----------------------- **/
+
+/** ------- PAGING -------- **/
+.paging {
+	background-color: #aaa;
+	padding: 4px 6px;
+	text-align: center;
+	margin-top: 12px;
+	border-radius: 5px;
+}
+
+.paging span {
+	display: inline-block;
+}
+
+.paging-direction-indicator {
+	margin: 0px 6px;
+	padding: 5px 8px;
+	background-color: #dadada;
+	font-weight: bold;
+	border-radius: 5px;
+}
+
+.paging-direction-indicator:first-child {
+	margin-left: 0px;
+}
+
+.paging-direction-indicator:last-child {
+	margin-right: 0px;
+}
+
+.paging-direction-indicator:hover {
+	cursor: pointer;
+	background-color: #444;
+	color: #eee;
+}
+
+.paging-location-indicator {
+	margin: 0px 6px;
+	padding: 5px 8px;
+	font-weight: bold;
+	background-color: #ccc;
+	border-radius: 5px;
 }
 /** ----------------------- **/
