@@ -6,9 +6,6 @@
  * @subpackage Twenty_Thirteen
  * @since Twenty Thirteen 1.0
  */
- 
- require('webmat-config.php');
- require('webmat-functions.php');
 
 get_header(); ?>
 
@@ -269,7 +266,9 @@ get_header(); ?>
 									<?php
 										$page = 1;
 										
-										echo getRequestDetailsContent($db, $page, $PAGING_SIZE);
+										echo "<div id='request-details-content'>";
+											echo getRequestDetailsContent($db, $page, $PAGING_SIZE);
+										echo "</div>";
 										
 										echo getPaging($page, $PAGING_SIZE, $requests_number);
 									?>

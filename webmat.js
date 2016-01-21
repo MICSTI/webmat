@@ -3,7 +3,9 @@ var CATEGORIES = {
 	2: "field",
 	3: "workplace",
 	4: "size"
-}
+};
+
+var API_URL = "/index.php?__api=";
 
 var selectCategory = function(_id, _tabno) {
 	// remove active classes
@@ -130,6 +132,21 @@ var initPaging = function() {
 			}
 			
 			jQuery("#paging-current").text(_page);
+			
+			// make AJAX request
+			jQuery.get(API_URL + "result_details&page=" + _page, function(response) {
+				// check response status
+				if (response.status !== undefined && response.status === "ok") {
+					jQuery("#request-details-content").fadeOut(250, function() {
+						jQuery(this).html(response.data).fadeIn(250, function() {
+							// load country indicators
+							loadCountryIndicators();
+						});
+					});
+				} else {
+					console.log("AJAX ERROR", response.message);
+				}
+			});
 		});
 	}
 }

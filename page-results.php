@@ -6,9 +6,6 @@
  * @subpackage Twenty_Thirteen
  * @since Twenty Thirteen 1.0
  */
- 
- require('webmat-config.php');
- require('webmat-functions.php');
 
 get_header(); ?>
 

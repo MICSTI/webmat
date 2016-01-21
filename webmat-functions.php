@@ -533,3 +533,44 @@
 		
 		return $dateParts[2] . "." . $dateParts[1] . "." . $dateParts[0] . " " . $time;
 	}
+	
+	function getApiResponse($query) {
+		$response = array();
+		
+		global $PAGING_SIZE;
+		
+		$api = $query["__api"];
+		
+		switch ($api) {
+			case "result_details":
+				$page = isset($query["page"]) ? $query["page"] : 1;
+				$db = getDb();
+				
+				$response["data"] = getRequestDetailsContent($db, $page, $PAGING_SIZE);
+				
+				$response["status"] = "ok";
+			
+				break;
+				
+			default:
+				$response["status"] = "error";
+				$response["message"] = "unknown API identifier";
+				
+				break;
+		}
+		
+		return $response;
+	}
+	
+	function getDb() {
+		global $DATABASE_HOST;
+		global $DATABASE_NAME;
+		global $DATABASE_USER;
+		global $DATABASE_PASSWORD;
+		
+		$db = new PDO('mysql:host=' . $DATABASE_HOST . ';dbname=' . $DATABASE_NAME . ';charset=utf8', $DATABASE_USER, $DATABASE_PASSWORD);
+		$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+		$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+		
+		return $db;
+	}

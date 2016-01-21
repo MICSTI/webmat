@@ -5,6 +5,9 @@
  * @package Expound
  */
 
+require('webmat-config.php');
+require('webmat-functions.php');
+
 /**
  * Set the content width based on the theme's design and stylesheet.
  */
@@ -90,6 +93,7 @@ function expound_setup() {
 	) );
 }
 endif; // expound_setup
+
 add_action( 'after_setup_theme', 'expound_setup' );
 
 
@@ -139,6 +143,7 @@ function expound_scripts() {
 	}
 	
 	// WEBMAT scripts
+	wp_enqueue_script( 'chart-js', get_template_directory_uri() . '/js/Chart.min.js', array(), '20160104', true );
 	wp_enqueue_script( 'webmat-js', get_template_directory_uri() . '/js/webmat.js', array('jquery'), '20151123', true );
 }
 add_action( 'wp_enqueue_scripts', 'expound_scripts' );
@@ -286,3 +291,26 @@ function expound_shortcode_atts_caption( $attr ) {
 	return $attr;
 }
 add_filter( 'shortcode_atts_caption', 'expound_shortcode_atts_caption' );
+
+function add_query_vars($vars){
+	$vars[] = '__api';
+	$vars[] = 'page';
+	return $vars;
+}
+add_filter('query_vars', 'add_query_vars');
+
+function sniff_requests() {
+	global $wp;
+	
+	if (isset($wp->query_vars['__api'])) {
+		send_response($wp->query_vars);
+		exit;
+	}
+}
+add_action('parse_request', 'sniff_requests');
+
+function send_response($query) {
+	$response = getApiResponse($query);
+	header('content-type: application/json; charset=utf-8');
+	echo json_encode($response) . "\n";
+}
