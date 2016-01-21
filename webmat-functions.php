@@ -481,7 +481,7 @@
 			$html .= "<div class='stats-info-group-wrapper'>";
 				$html .= "<div class='stats-info-group whole-row'>";
 					// request timestamp
-					$html .= "<span>" . convertDatetime($request["RequestTimestamp"]) . "</span>";
+					$html .= "<span class='bold'>" . convertDatetime($request["RequestTimestamp"]) . "</span>";
 					
 					// container for country and survey spans
 					$html .= "<span class='float-right'>";
@@ -493,6 +493,8 @@
 						// country span
 						$html .= "<span class='country-indicator' data-ip='" . $request["IpAddress"] . "'></span>";
 					$html .= "</span>";
+					
+					$html .= "<div class='request-detail-wrapper'></div>";
 				$html .= "</div>";
 			$html .= "</div>";
 		}

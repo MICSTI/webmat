@@ -139,6 +139,9 @@ var initPaging = function() {
 				if (response.status !== undefined && response.status === "ok") {
 					jQuery("#request-details-content").fadeOut(250, function() {
 						jQuery(this).html(response.data).fadeIn(250, function() {
+							// init request detail loading
+							initRequestDetailLoading();
+							
 							// load country indicators
 							loadCountryIndicators();
 						});
@@ -149,7 +152,77 @@ var initPaging = function() {
 			});
 		});
 	}
-}
+};
+
+var initRequestDetailLoading = function() {
+	jQuery(".stats-info-group").off("click");
+	jQuery(".stats-info-group").on("click", function() {
+		var details = jQuery(this).children(".request-detail-wrapper").first();
+		
+		if (details.html() != "") {
+			details.fadeOut(120, function() {
+				details.html("");
+			});
+		} else {
+			var detailHtml = "";
+			
+			detailHtml += getInfoFromIp(jQuery(this).children(".float-right").children(".country-indicator").first());
+			
+			// show
+			details.html(detailHtml)
+				   .fadeIn(250);
+		}
+	});
+};
+
+var getInfoFromIp = function(elem) {
+	var html = "";
+	
+	html += "<div class='ip-info-detail'>";
+		if (elem !== undefined) {
+			html += "<div class='ip-info-title'>IP Address Info</div>";
+							
+			var attrs = [{
+				attr: "data-country",
+				display: "Country"
+			}, {
+				attr: "data-country-code",
+				display: "Country code"
+			}, {
+				attr: "data-region-name",
+				display: "Region name"
+			}, {
+				attr: "data-city",
+				display: "City"
+			}, {
+				attr: "data-org",
+				display: "Organisation"
+			}, {
+				attr: "data-mobile",
+				display: "On mobile device"
+			}];
+			
+			attrs.forEach(function(item, idx) {
+				var value = elem.attr(item.attr);
+				
+				if (value == "true") {
+					value = "Yes";
+				} else if (value == "false") {
+					value = "No";
+				}
+				
+				html += "<div class='ip-info-attr'>";
+					html += "<span class='bold'>" + item.display + "</span>: ";
+					html += "<span>" + value + "</span>";
+				html += "</div>";
+			});
+		} else {
+			html += "<div>Unfortunately, no info available. Sorry!</div>";
+		}
+	html += "</div>";
+	
+	return html;
+};
 
 /**
 	Loads all country indicators and fades them in upon fetch completion
@@ -368,6 +441,9 @@ jQuery(document).ready(function() {
 						
 						// add paging
 						initPaging();
+						
+						// init request detail loading
+						initRequestDetailLoading();
 					});
 				});
 			}
