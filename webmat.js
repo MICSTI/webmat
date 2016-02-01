@@ -187,36 +187,55 @@ var initRequestDetailLoading = function() {
 					   jQuery.get(API_URL + "request_details&id=" + _id, function(response) {
 							// check response status
 							if (response.status !== undefined && response.status === "ok") {
+								console.log(response);
 								var _data = response.data;
 								
 								var _request = _data["request"];
 								
-								var html = "<div><div class='request-details'>";
+								var html = "<div>";
 								
-								html += "<div class='request-details-title'>Request details</div>";
-								
-								Object.getOwnPropertyNames(_request).forEach(function(category) {
-									var elements = _request[category] || [];
+									// request details
+									html += "<div class='request-details'>";
+										html += "<div class='request-details-title'>Request details</div>";
+										
+										Object.getOwnPropertyNames(_request).forEach(function(category) {
+											var elements = _request[category] || [];
+											
+											html += "<div class='request-details-category'>";
+												html += "<div class='request-details-category-title'>" + category + "</div>";
+												html += "<div class='request-details-category-elements'>";
+													elements.forEach(function(prop) {
+														var text = prop["display"] || "";
+														html += "<span>" + text + "</span>";
+													});
+												html += "</div>";
+											html += "</div>";
+										});
 									
-									html += "<div class='request-details-category'>";
-										html += "<div class='request-details-category-title'>" + category + "</div>";
-										html += "<div class='request-details-category-elements'>";
-											elements.forEach(function(prop) {
-												var text = prop["display"] || "";
-												html += "<span>" + text + "</span>";
-											});
-										html += "</div>";
 									html += "</div>";
-								});
 								
-								html += "</div></div>";
-								
-								// survey
-								var _survey = _data["survey"] || [];
-								
-								if (_survey.length > 0) {
-									html += "<div>SURVEY</div>";
-								}
+									// survey
+									var _survey = _data["survey"] || [];
+									
+									if (_survey.length > 0) {
+										html += "<div class='survey-details'>";
+											html += "<div class='survey-details-title'>Survey details</div>";
+											
+											_survey.forEach(function(question) {
+												var _question = question["question"] || "";
+												var _answer = question["answer"] || "";
+												
+												html += "<div class='request-details-category'>";
+													html += "<div class='request-details-category-title'>" + _question + "</div>";
+													html += "<div class='request-details-category-elements'>";
+														html += _answer;
+													html += "</div>";
+												html += "</div>";
+											});												
+										html += "</div>";
+									}
+									
+								html += "</div>";
 								
 								// remove loading indicator
 								loading.remove();

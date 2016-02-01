@@ -696,12 +696,14 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 	margin-top: 16px;
 }
 
-.request-details {
+.request-details, .survey-details {
 	background-color: #ccc;
 	margin-top: 16px;
 	border-radius: 6px;
 	display: inline-block;
 	min-width: 260px;
+	margin-right: 20px;
+	vertical-align: top;
 }
 
 .request-details-title {
@@ -741,6 +743,13 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 
 .request-details-category-elements span:last-child {
 	margin-right: 0px;
+}
+
+.survey-details-title {
+	font-weight: bold;
+	margin-bottom: 5px;
+	padding: 8px 12px;
+	text-align: center;
 }
 /** ----------------------- **/
 

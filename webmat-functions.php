@@ -90,6 +90,21 @@
 											)
 					);
 
+	function getSurveyQuestion($property) {
+		global $FIELDS_SURVEY;
+		global $KEY_PROPERTY;
+		
+		$questions = $FIELDS_SURVEY["Questions"];
+		
+		foreach ($questions as $question) {
+			if ($question[$KEY_PROPERTY] == $property) {
+				return $question;
+			}
+		}
+		
+		return false;
+	}
+					
 	function getGroupPageContent($category, $host, $db_name, $db_user, $password) {
 		$html = "";
 		
@@ -561,11 +576,25 @@
 					$db = getDb();
 					
 					$raw_details = getRequestDetails($db, $id);
+					$raw_survey = getSurveyDetails($db, $id);
+					
+					// try to get mail address
+					$mail = getContactMailAddress($db, $id);
 					
 					// add categories to request details	
 					$response["data"] = array();
 					
 					$response["data"]["request"] = getCategoriedDetails($raw_details);
+					
+					$merger = array();
+					
+					if ($mail != "") {
+						array_push($merger, array("question" => "E-mail address", "answer" => $mail));
+					}
+					
+					$categoried_survey = getCategoriedSurvey($raw_survey);
+					
+					$response["data"]["survey"] = array_merge($merger, $categoried_survey);
 				
 					$response["status"] = "ok";
 				} else {
@@ -620,6 +649,20 @@
 		return $response;
 	}
 	
+	function getSurveyDetails($db, $id) {
+		$query = $db->prepare("SELECT
+								 prop AS 'Property',
+								 value AS 'Value'
+							   FROM
+								 the_tool_survey
+							   WHERE
+								 request_id = :request_id");
+			
+		$query->execute( array(':request_id' => $id) );
+		
+		return $query->fetchAll(PDO::FETCH_ASSOC);
+	}
+	
 	function getCategoriedDetails($raw_details) {
 		global $FIELDS_TOOL;
 		global $KEY_PROPERTY;
@@ -639,6 +682,50 @@
 					array_push($details[$category], $element);
 				}
 			}
+		}
+		
+		return $details;
+	}
+	
+	function getContactMailAddress($db, $request_id) {
+		$query = $db->prepare("SELECT
+								 mail AS 'SurveyContact'
+							   FROM
+								 the_tool_data
+							   WHERE
+								 id = :request_id");
+			
+		$query->execute( array(':request_id' => $request_id) );
+		
+		$result = $query->fetch(PDO::FETCH_ASSOC);
+		
+		return $result["SurveyContact"];
+	}
+	
+	function getCategoriedSurvey($raw_survey) {
+		global $FIELDS_SURVEY;
+		global $KEY_DISPLAY;
+		global $KEY_TRANSLATION;
+		
+		$details = array();
+		
+		// iterate over survey fields
+		foreach ($raw_survey as $elem) {
+			$element = array();
+			
+			$question = getSurveyQuestion($elem["Property"]);
+			
+			if ($question !== false) {
+				$element["question"] = $question[$KEY_DISPLAY];
+				
+				if (is_array($question[$KEY_TRANSLATION])) {
+					$element["answer"] = array_key_exists($elem["Value"], $question[$KEY_TRANSLATION]) ? $question[$KEY_TRANSLATION][$elem["Value"]] : $elem["Value"];
+				} else {
+					$element["answer"] = $elem["Value"];
+				}
+			}
+			
+			array_push($details, $element);
 		}
 		
 		return $details;
