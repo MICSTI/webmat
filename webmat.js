@@ -103,54 +103,58 @@ var animateProgressBars = function() {
 	});
 }
 
+var pagingClickHandler = function(direction) {
+	if (direction == "back") {
+		// back
+		var _page = parseInt(jQuery("#paging-current").text()) - 1;
+		
+		if (_page == 1) {
+			jQuery("#paging-" + direction).css("visibility", "hidden");
+		}
+		
+		jQuery(".paging-direction-indicator[data-direction=forward]").css("visibility", "visible");
+	} else {
+		// forward
+		var _page = parseInt(jQuery("#paging-current").text()) + 1;
+		
+		if (_page == parseInt(jQuery("#paging-max").text())) {
+			jQuery("#paging-" + direction).css("visibility", "hidden");
+		}
+		
+		jQuery(".paging-direction-indicator[data-direction=back]").css("visibility", "visible");
+	}
+	
+	jQuery("#paging-current").text(_page);
+	
+	// make AJAX request
+	jQuery.get(API_URL + "result_details&page=" + _page, function(response) {
+		// check response status
+		if (response.status !== undefined && response.status === "ok") {
+			jQuery("#request-details-content").fadeOut(250, function() {
+				jQuery(this).html(response.data).fadeIn(250, function() {
+					// init request detail loading
+					initRequestDetailLoading();
+					
+					// load country indicators
+					loadCountryIndicators();
+				});
+			});
+		} else {
+			console.log("AJAX ERROR", response.message);
+		}
+	});
+}
+
 /**
 	Inits the paging on a page
 */
 var initPaging = function() {
 	if (jQuery(".paging").length > 0) {
-		jQuery(".paging-direction-indicator").on("click", function() {
+		/*jQuery(".paging-direction-indicator").on("click", function() {
 			var direction = jQuery(this).attr("data-direction");
 			
-			if (direction == "back") {
-				// back
-				var _page = parseInt(jQuery("#paging-current").text()) - 1;
-				
-				if (_page == 1) {
-					jQuery(this).css("visibility", "hidden");
-				}
-				
-				jQuery(".paging-direction-indicator[data-direction=forward]").css("visibility", "visible");
-			} else {
-				// forward
-				var _page = parseInt(jQuery("#paging-current").text()) + 1;
-				
-				if (_page == parseInt(jQuery("#paging-max").text())) {
-					jQuery(this).css("visibility", "hidden");
-				}
-				
-				jQuery(".paging-direction-indicator[data-direction=back]").css("visibility", "visible");
-			}
-			
-			jQuery("#paging-current").text(_page);
-			
-			// make AJAX request
-			jQuery.get(API_URL + "result_details&page=" + _page, function(response) {
-				// check response status
-				if (response.status !== undefined && response.status === "ok") {
-					jQuery("#request-details-content").fadeOut(250, function() {
-						jQuery(this).html(response.data).fadeIn(250, function() {
-							// init request detail loading
-							initRequestDetailLoading();
-							
-							// load country indicators
-							loadCountryIndicators();
-						});
-					});
-				} else {
-					console.log("AJAX ERROR", response.message);
-				}
-			});
-		});
+			pagingClickHandler(direction);
+		});*/
 	}
 };
 
