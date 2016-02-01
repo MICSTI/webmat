@@ -479,7 +479,7 @@
 		
 		foreach ($requests as $request) {
 			$html .= "<div class='stats-info-group-wrapper'>";
-				$html .= "<div class='stats-info-group whole-row'>";
+				$html .= "<div class='stats-info-group whole-row' data-id='" . $request["RequestId"] . "'>";
 					// request timestamp
 					$html .= "<span class='bold'>" . convertDatetime($request["RequestTimestamp"]) . "</span>";
 					
@@ -554,6 +554,27 @@
 			
 				break;
 				
+			case "request_details":
+				$id = isset($query["id"]) ? $query["id"] : false;
+			
+				if ($id !== false) {
+					$db = getDb();
+					
+					$raw_details = getRequestDetails($db, $id);
+					
+					// add categories to request details	
+					$response["data"] = array();
+					
+					$response["data"]["request"] = getCategoriedDetails($raw_details);
+				
+					$response["status"] = "ok";
+				} else {
+					$response["status"] = "error";
+					$response["message"] = "no valid ID passed";
+				}
+			
+				break;
+				
 			default:
 				$response["status"] = "error";
 				$response["message"] = "unknown API identifier";
@@ -575,4 +596,50 @@
 		$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 		
 		return $db;
+	}
+	
+	function getRequestDetails($db, $id) {
+		$response = array();
+		
+		$query = $db->prepare("SELECT
+								 prop AS 'SelectedProperty'
+							   FROM
+								 the_tool_details
+							   WHERE
+								 request_id = :request_id AND 
+							     value = 1");
+			
+		$query->execute( array(':request_id' => $id) );
+		
+		$details = $query->fetchAll(PDO::FETCH_ASSOC);
+		
+		foreach ($details as $detail) {
+			array_push($response, $detail["SelectedProperty"]);
+		}
+		
+		return $response;
+	}
+	
+	function getCategoriedDetails($raw_details) {
+		global $FIELDS_TOOL;
+		global $KEY_PROPERTY;
+		
+		$details = array();
+		
+		// iterate over tool fields
+		$categories = array_keys($FIELDS_TOOL);
+		
+		foreach ($categories as $category) {
+			$elements = $FIELDS_TOOL[$category];
+			
+			$details[$category] = array();
+			
+			foreach ($elements as $element) {
+				if (in_array($element[$KEY_PROPERTY], $raw_details)) {
+					array_push($details[$category], $element);
+				}
+			}
+		}
+		
+		return $details;
 	}

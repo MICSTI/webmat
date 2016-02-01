@@ -295,6 +295,7 @@ add_filter( 'shortcode_atts_caption', 'expound_shortcode_atts_caption' );
 function add_query_vars($vars){
 	$vars[] = '__api';
 	$vars[] = 'page';
+	$vars[] = 'id';
 	return $vars;
 }
 add_filter('query_vars', 'add_query_vars');
