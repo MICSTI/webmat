@@ -677,13 +677,23 @@ get_header(); ?>
 									
 									<div class="survey-paragraph">
 										<div class="survey-paragraph-title" >
+											Are there any thoughts you'd like to share with us?
+										</div>
+										
+										<div>
+											<textarea id="q-thoughts" name="thoughts"></textarea>
+										</div>
+									</div>	
+									
+									<div class="survey-paragraph">
+										<div class="survey-paragraph-title" >
 											Leave your email for follow up.
 										</div>
 										
 										<div>
 											<input id="q-mail" name="mail" type="email" size="40"/>
 										</div>
-									</div>	
+									</div>
 									
 									<div class="survey-paragraph">
 										<div class="survey-title">

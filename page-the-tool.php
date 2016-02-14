@@ -66,9 +66,7 @@ get_header(); ?>
 									<span class="the-tool-line"></span>
 									<span class="the-tool-circle" id="category-field" data-category="field" data-no="2"></span>
 									<span class="the-tool-line"></span>
-									<span class="the-tool-circle" id="category-workplace" data-category="workplace" data-no="3"></span>
-									<span class="the-tool-line"></span>
-									<span class="the-tool-circle" id="category-size" data-category="size" data-no="4"></span>
+									<span class="the-tool-circle" id="category-size" data-category="size" data-no="3"></span>
 								</div>
 								
 								<div class="the-tool-section">
@@ -114,17 +112,10 @@ get_header(); ?>
 												<div class="category-choice" data-id="commitment">Commitment</div>
 												<div class="category-choice" data-id="competence">Competence</div>
 											</div>
-										
-										</div>
-									</div>
-									
-									<div class="the-tool-content" id="content-workplace">
-										<div class="category-question">Is it a workplace setting?</div>
-										
-										<div class="category-choice-container">
-										
-											<div class="category-choice" data-id="workplace">Yes</div>
-											<div class="category-choice">No</div>
+											
+											<div class="category-row">
+												<div class="category-choice" data-id="workplace">Workplace setting</div>
+											</div>
 										
 										</div>
 									</div>

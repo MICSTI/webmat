@@ -1,8 +1,7 @@
 var CATEGORIES = {
 	1: "age",
 	2: "field",
-	3: "workplace",
-	4: "size"
+	3: "size"
 };
 
 var API_URL = "/index.php?__api=";
@@ -25,7 +24,7 @@ var selectCategory = function(_id, _tabno) {
 			
 			break;
 			
-		case 4:
+		case 3:
 			jQuery("#the-tool-button-back").show();
 			jQuery("#the-tool-button-next").hide();
 			jQuery("#the-tool-button-submit").show();
@@ -45,6 +44,7 @@ var selectCategory = function(_id, _tabno) {
 	Displays the tool, after the button on the welcome page has been clicked.
 */
 var showTheTool = function() {
+	jQuery(".webmat-intro").hide();
 	jQuery(".the-tool-intro").hide();
 	jQuery(".the-tool-wrapper").show();
 }

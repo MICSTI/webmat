@@ -86,7 +86,8 @@
 												)),
 												array($KEY_PROPERTY => "based", $KEY_DISPLAY => "Where are you currently based?", $KEY_TYPE => "list-plain"),
 												array($KEY_PROPERTY => "funded", $KEY_DISPLAY => "Is your work funded?", $KEY_TYPE => "doughnut", $KEY_TRANSLATION => array("yes" => "Yes", "no" => "No")),
-												array($KEY_PROPERTY => "use", $KEY_DISPLAY => "Are you going to use the recommendations from the tool?", $KEY_TYPE => "doughnut", $KEY_TRANSLATION => array("yes" => "Yes", "no" => "No"))
+												array($KEY_PROPERTY => "use", $KEY_DISPLAY => "Are you going to use the recommendations from the tool?", $KEY_TYPE => "doughnut", $KEY_TRANSLATION => array("yes" => "Yes", "no" => "No")),
+												array($KEY_PROPERTY => "thoughts", $KEY_DISPLAY => "Are there any thoughts you'd like to share with us?")
 											)
 					);
 
