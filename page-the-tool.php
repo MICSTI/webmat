@@ -26,10 +26,18 @@ get_header(); ?>
 						
 					</header><!-- .entry-header -->
 
-					<div class="entry-content">
+					<div class="entry-content the-tool-home">
+					
+						<div class="webmat-intro">
+							<div class="category-question">Welcome to WEBMAT</div>
+							
+							<div class="the-tool-intro-text">
+								WEBMAT is an interactive tool for advising on the best available well-being measurements for users’ specific needs, taking into account study design, purpose, application and length.
+							</div>
+						</div>
 						
 						<div class="the-tool-intro">
-							<div class="category-question">Welcome to The Tool</div>
+							<div class="category-question">Use The Tool</div>
 							
 							<div class="the-tool-intro-text">
 								<div>

@@ -17,6 +17,10 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 @import url('css/expound.css?v=20140129');
 
 /* ------ WEBMAT CSS ------ */
+.the-tool-home {
+	margin-top: 0px !important;
+}
+
 .whole-row {
 	width: 95%;
 }
@@ -318,6 +322,11 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 
 .the-tool-intro {
 	text-align: center;
+}
+
+.webmat-intro {
+	text-align: center;
+	margin-bottom: 48px;
 }
 
 .the-tool-intro-text {
@@ -796,3 +805,6 @@ Expound is based on Underscores http://underscores.me/, (C) 2012-2013 Automattic
 	border-radius: 5px;
 }
 /** ----------------------- **/
+article#post-463 {
+	border-bottom: none !important;
+}
