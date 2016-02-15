@@ -677,7 +677,7 @@ get_header(); ?>
 									
 									<div class="survey-paragraph">
 										<div class="survey-paragraph-title" >
-											Are there any thoughts you'd like to share with us?
+											Are there any thoughts you would like to share with us?
 										</div>
 										
 										<div>
