@@ -191,7 +191,6 @@ var initRequestDetailLoading = function() {
 					   jQuery.get(API_URL + "request_details&id=" + _id, function(response) {
 							// check response status
 							if (response.status !== undefined && response.status === "ok") {
-								console.log(response);
 								var _data = response.data;
 								
 								var _request = _data["request"];
@@ -477,6 +476,9 @@ jQuery(document).ready(function() {
 				break;
 		}
 	}
+	
+	// remove unwanted paragraphs
+	jQuery(".webmat-survey-container p").remove();
 	
 	var statsContent = jQuery(".stats-content");
 	

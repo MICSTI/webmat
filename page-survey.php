@@ -20,6 +20,15 @@ get_header(); ?>
 					$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 					$db->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 					
+					// was the survey filled out on the feedback page?
+					if ($request_id == "_feedback") {
+						// save request to database
+						$ip = $_SERVER['REMOTE_ADDR'];
+						
+						// request meta data
+						$request_id = addRequestMetaData($db, $ip);
+					} 
+					
 					// add survey details to db
 					addSurveyDetails($db, $request_id, $_POST, $FIELDS_SURVEY, $KEY_PROPERTY);
 					

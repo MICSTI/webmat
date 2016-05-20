@@ -321,7 +321,7 @@ get_header(); ?>
 							
 								<div class="survey-paragraph">
 									<div id="survey-content-toggle" class="survey-title" onclick="toggleDisplay('survey-content')">
-										Do you mind telling us something about you and your study?<br/>Please take a moment, click here and fill out the questions below.
+										Do you mind telling us something about you and your work/study?<br/>Please take a moment, click here and fill out the questions below.
 									</div>
 								</div>
 								
@@ -339,7 +339,7 @@ get_header(); ?>
 									
 									<div class="survey-paragraph">
 										<div class="survey-paragraph-title" onclick="toggleDisplay('p-purpose')">
-											What is the purpose of your study?
+											Does your work that you are doing have a specific title/purpose?
 										</div>
 										
 										<div class="survey-paragraph-question" id="p-purpose">

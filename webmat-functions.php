@@ -59,7 +59,7 @@
 					);
 					
 	$FIELDS_SURVEY = array( "Questions" => array( array($KEY_PROPERTY => "helpful", $KEY_DISPLAY => "Have the suggestions been helpful for choosing a measurement?", $KEY_TYPE => "doughnut", $KEY_TRANSLATION => array("yes" => "Yes", "no" => "No")),
-												array($KEY_PROPERTY => "purpose", $KEY_DISPLAY => "What is the purpose of your study?", $KEY_TYPE => "list-plain"),
+												array($KEY_PROPERTY => "purpose", $KEY_DISPLAY => "Does your work that you are doing have a specific title/purpose?", $KEY_TYPE => "list-plain"),
 												array($KEY_PROPERTY => "occupation", $KEY_DISPLAY => "Are you a...", $KEY_TYPE => "bar-horizontal", $KEY_TRANSLATION => array(
 													"student" => "Student",
 													"researcher" => "Researcher",
